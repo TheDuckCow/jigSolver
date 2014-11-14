@@ -22,22 +22,30 @@ using namespace cv;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
-    Mat thing = Mat::zeros(100,100,CV_8UC1);
-    
-    // Create file handle
-    // Read content of the file
-    
-    
     //Load image with face
     UIImage* image = [UIImage imageNamed:@"lena.png"];
-    cv::Mat faceImage;
+    Mat faceImage;
     UIImageToMat(image, faceImage);
     
-    Mat binary = Mat::zeros(100,100, CV_8UC1);
+    NSLog(@"channels: %i",faceImage.channels());
+    
+    // this daoes not work, does not recognize GaussianBlur as a cv function!
+    //cv::GaussianBlur(faceImage, faceImage, cv::Size(5, 5), 1.2, 1.2);
+    
+    
+    Mat binary = Mat::zeros(faceImage.size(), CV_8UC1);
+    for (int x=0; x<binary.cols; x++){
+        for (int y=0; y< binary.rows; y++){
+            // IT NEEDED TO BE Vec4b BECAUSE IT IS READ IN AS FOUR CHANNELS
+            if (faceImage.at<Vec4b>(y,x)[0] > 200){
+                binary.at<uchar>(y,x) = 255;
+            }
+        }
+    }
     
     
     self.swer.image = MatToUIImage(binary);
+    //self.swer.image = image;
     
     
     
@@ -47,7 +55,6 @@ using namespace cv;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 
