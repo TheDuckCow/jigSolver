@@ -8,6 +8,7 @@
 
 
 #import "opencv2/highgui/ios.h"
+#import <opencv2/opencv.hpp>
 #import "ViewController.h"
 using namespace cv;
 
@@ -31,6 +32,8 @@ using namespace cv;
     
     // this daoes not work, does not recognize GaussianBlur as a cv function!
     //cv::GaussianBlur(faceImage, faceImage, cv::Size(5, 5), 1.2, 1.2);
+    Mat greyMat;
+    cv::cvtColor(faceImage, greyMat, CV_BGR2GRAY);
     
     
     Mat binary = Mat::zeros(faceImage.size(), CV_8UC1);
@@ -45,6 +48,7 @@ using namespace cv;
     
     
     self.swer.image = MatToUIImage(binary);
+    //self.swer.image = MatToUIImage(greyMat);
     //self.swer.image = image;
     
     
