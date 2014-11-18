@@ -87,23 +87,37 @@ using namespace cv;
     threshold(gray,dst,60,255,THRESH_BINARY);
     blur(dst, dst, cv::Size(5,5));
     
+    int erosion_size = 4;
+    int dilation_size = 4;
+    
+    Mat element = getStructuringElement( MORPH_RECT,
+                                        cv::Size( 2*erosion_size + 1, 2*erosion_size+1 ),
+                                        cv::Point( erosion_size, erosion_size ) );
+    
+    //perform erosions and dilations
+    erode(gray, gray, element, cv::Point(-1, -1), 2);
+    
+    
+    
     // second to last = neighborhood search, last number .. just leave it 0
     //adaptiveThreshold(gray, dst, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 51, -10);
     
     vector<vector<cv::Point>> contours;
     vector<Vec4i> hierarchy;
-    findContours(gray,contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+    
+    findContours(dst,contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
     
     
     // now find the largest contour.. assumed to be the background
     NSLog(@"Contours: %lu", contours.size());
     Mat contourOut = Mat::zeros(dst.size(),CV_8UC1);
-    for (int i=0; i< 3; i++){
+    for (int i=0; i< contours.size(); i++){
         //drawContours(contourOut, contours, i, 200, CV_FILLED, 8, hierarchy);
+        drawContours(contourOut, contours, i, 200, 6, 8, hierarchy);
     }
-    drawContours(contourOut, contours, 0, 200, CV_FILLED, 8, hierarchy);
+    //drawContours(contourOut, contours, 1, 200, CV_FILLED, 8, hierarchy);
     
-    //dst = contourOut.clone();
+    dst = contourOut.clone();
     
     
     //dst = Mat::zeros(src.size(), CV_8UC1);
