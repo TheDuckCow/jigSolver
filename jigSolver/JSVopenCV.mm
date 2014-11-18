@@ -22,7 +22,7 @@ using namespace cv;
     NSLog(@"channels: %i",faceImage.channels());
     
     // this daoes not work, does not recognize GaussianBlur as a cv function!
-    //cv::GaussianBlur(faceImage, faceImage, cv::Size(5, 5), 1.2, 1.2);
+    cv::GaussianBlur(faceImage, faceImage, cv::Size(5, 5), 1.2, 1.2);
     Mat greyMat;
     cv::cvtColor(faceImage, greyMat, CV_BGR2GRAY);
     
@@ -41,5 +41,17 @@ using namespace cv;
     
     return output;
 }
+
+- (void) segmentFromBackground: (Mat *) src withDest: (Mat *) dst{
+    
+    // at first assume the background is one consistent color
+    // later, we can try to detect this color.
+    
+    // haven't figure dout how to make clone work.. which would be useful
+    //dst = src->Mat::clone();
+    //dst = src.clone();
+
+}
+
 
 @end
