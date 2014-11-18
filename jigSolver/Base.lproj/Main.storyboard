@@ -25,7 +25,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="swer" destination="dco-tJ-MD6" id="Nqz-9s-VNP"/>
+                        <outlet property="swer" destination="dco-tJ-MD6" id="ROR-0t-8po"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
