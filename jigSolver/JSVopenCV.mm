@@ -113,10 +113,13 @@ using namespace cv;
     Mat contourOut = Mat::zeros(dst.size(),CV_8UC1);
     for (int i=0; i< contours.size(); i++){
         //drawContours(contourOut, contours, i, 200, CV_FILLED, 8, hierarchy);
-        drawContours(contourOut, contours, i, 200, 6, 8, hierarchy);
+        int area = contourArea(contours[i]);
+        if (area >50000){
+            drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
+        }
     }
-    //drawContours(contourOut, contours, 1, 200, CV_FILLED, 8, hierarchy);
     
+    // now should run again or otherwise fill the holes
     dst = contourOut.clone();
     
     
