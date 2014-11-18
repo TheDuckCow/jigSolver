@@ -7,11 +7,8 @@
 //
 
 
-#import "opencv2/highgui/ios.h"
-#import <opencv2/opencv.hpp>
 #import "JSVopenCV.h"
 #import "ViewController.h"
-using namespace cv;
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *swer;
@@ -23,11 +20,19 @@ using namespace cv;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // the heavy processing all hapens here.
+    NSArray *solutions =@[@"IMG_2774.JPG",@"IMG_2780.JPG"];
+    NSArray *scrambled = @[@"IMG_2785.JPG"];
 
     
-    UIImage* img = [UIImage imageNamed:@"lena.png"];
-    self.swer.image = [JSVopenCV testFunction: img];
+    self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambled[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
+    //self.swer.image =[UIImage imageNamed:scrambled[0]];
+    
+    // test process
+    //UIImage* img = [UIImage imageNamed:@"lena.png"];
+    //self.swer.image = [JSVopenCV testFunction: img];
     
     
 }
@@ -36,7 +41,6 @@ using namespace cv;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 @end

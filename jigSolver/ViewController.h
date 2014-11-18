@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "opencv2/highgui/ios.h"
 
 @interface ViewController : UIViewController {
-    cv::Mat cvImage;
+
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView* imageView;

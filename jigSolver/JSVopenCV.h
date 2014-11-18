@@ -12,5 +12,7 @@
 @interface JSVopenCV : NSObject
 
 + (UIImage *)testFunction:(UIImage *)input;
++ (UIImage *)solvePuzzle:(UIImage *)input withOriginal: (UIImage *) original;
+
 
 @end
