@@ -30,6 +30,7 @@
 		14A687651A168E15009A188C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14A687641A168E15009A188C /* Images.xcassets */; };
 		14A687681A168E15009A188C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A687661A168E15009A188C /* LaunchScreen.xib */; };
 		14A687741A168E15009A188C /* jigSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A687731A168E15009A188C /* jigSolverTests.m */; };
+		14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */; };
 		14DD94EE1A1B143B001E6E64 /* test1_source.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14DD94ED1A1B143B001E6E64 /* test1_source.jpg */; };
 		385074F7670548A6D1FC3608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD4C8D9F22DFD5AB9C7D759 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,8 @@
 		14A6876D1A168E15009A188C /* jigSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jigSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A687721A168E15009A188C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A687731A168E15009A188C /* jigSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jigSolverTests.m; sourceTree = "<group>"; };
+		14B4EC291A2996AF009F494A /* JSVpuzzlePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVpuzzlePiece.h; sourceTree = "<group>"; };
+		14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JSVpuzzlePiece.mm; sourceTree = "<group>"; };
 		14DD94ED1A1B143B001E6E64 /* test1_source.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test1_source.jpg; sourceTree = "<group>"; };
 		3DD4C8D9F22DFD5AB9C7D759 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F76E6962E4F776AA6988A6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				14A6875F1A168E15009A188C /* ViewController.m */,
 				1455DCC41A1AC30E008264FF /* JSVopenCV.h */,
 				1455DCC51A1AC30E008264FF /* JSVopenCV.mm */,
+				14B4EC291A2996AF009F494A /* JSVpuzzlePiece.h */,
+				14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */,
 				14DD94ED1A1B143B001E6E64 /* test1_source.jpg */,
 				143F4B311A1B350B00E83FC6 /* testSources */,
 				14A687611A168E15009A188C /* Main.storyboard */,
@@ -356,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1455DCC61A1AC30E008264FF /* JSVopenCV.mm in Sources */,
+				14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */,
 				14A687601A168E15009A188C /* ViewController.m in Sources */,
 				14A6875D1A168E15009A188C /* AppDelegate.m in Sources */,
 				14A6875A1A168E15009A188C /* main.m in Sources */,
