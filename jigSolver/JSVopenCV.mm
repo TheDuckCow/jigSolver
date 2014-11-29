@@ -136,10 +136,10 @@ using namespace std;
         int area = contourArea(contours[i]);
         if (area >50000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
-        }
+        } 
         
         // now create the additional PuzzlePiece objects.
-        NSLog(@"ISSUE IS HERE in trying to allocate/create teh puzzlePiece object,\nLine 140 of 'JSVopenCV.mm'\n");
+        NSLog(@"ISSUE IS HERE in trying to allocate/create teh puzzlePiece object,\nLine 140 of 'JSVopenCV.mm'\n"); 
         JSVpuzzlePiece *piece = [[JSVpuzzlePiece alloc] init];
         piece.contour = contours[i];
         puzzleVector.push_back(*piece); // THIS IS THE BAD LINE, something isn't right...
