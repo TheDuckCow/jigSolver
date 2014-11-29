@@ -32,11 +32,11 @@ using namespace std;
     Vector<JSVpuzzlePiece> *puzzlePieces;
     
     // should segment and create individual puzzlePiece objects for each puzle piece
-    [self segmentPiecesFromBackground:inputM withPieces:*puzzlePieces];
+    [self segmentPiecesFromBackground:inputM withPieces:*puzzlePieces withDst: sansBackground];
     
     // now for each of these found puzzle pieces, create the edge objects/information
     // and figure out their geometry
-    sansBackground = Mat::zeros(inputM.size(), CV_8U);
+    //sansBackground = Mat::zeros(inputM.size(), CV_8U);
     //for (int i=0; i<puzzlePieces->size(); i++){
     for (int i=0; i<1; i++){
         NSLog(@"Output puzzle peice #%i",i);
@@ -81,13 +81,13 @@ using namespace std;
 // #####################################################################################
 
 
-+ (void) segmentPiecesFromBackground: (Mat &) src withPieces: (Vector<JSVpuzzlePiece> &) puzzleVector{
++ (void) segmentPiecesFromBackground: (Mat &) src withPieces: (Vector<JSVpuzzlePiece> &) puzzleVector withDst: (Mat &) dst{
     
     // at first assume the background is one consistent color
     // later, we can try to detect this color.
     // alternatively, we could floodfill the background and invert it
 
-    Mat dst = Mat::zeros(src.size(), CV_8UC1);
+    dst = Mat::zeros(src.size(), CV_8UC1);
     Mat gray;
     cvtColor(src,gray,CV_RGB2GRAY);
     
@@ -128,6 +128,7 @@ using namespace std;
     // final finding of contours, number of contours here = number of pieces
     findContours(contourOut,contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
     
+    
     // NOW do the final drawing of contours, should really only hav eindividual pieces contours.
     NSLog(@"Contours final (number of pieces): %lu", contours.size());
     contourOut = Mat::zeros(dst.size(),CV_8UC1);
@@ -139,21 +140,67 @@ using namespace std;
         } 
         
         // now create the additional PuzzlePiece objects.
-        NSLog(@"ISSUE IS HERE in trying to allocate/create teh puzzlePiece object,\nLine 140 of 'JSVopenCV.mm'\n"); 
+        NSLog(@"ISSUE IS HERE in trying to allocate/create the puzzlePiece object,\nLine 146 of 'JSVopenCV.mm'\n");
         JSVpuzzlePiece *piece = [[JSVpuzzlePiece alloc] init];
         piece.contour = contours[i];
         puzzleVector.push_back(*piece); // THIS IS THE BAD LINE, something isn't right...
         
+        
+        // now HERE crop the piece down to the bounding box of just the contour filled area,
+        // find the smallest and largest x and y values in the contour list of points
+        int x_lo = piece.contour[0].x;
+        int x_hi = piece.contour[0].x;
+        int y_lo = piece.contour[0].y;
+        int y_hi = piece.contour[0].y;
+        
+        for (int i=0; i< piece.contour.size(); i++){
+            
+            //NSLog(@"x:%i %i,y: %i %i",x_lo,x_hi,y_lo,y_hi);
+            int tmp = piece.contour[i].x;
+            if (tmp < x_lo){
+                x_lo = tmp;
+            }
+            else if (tmp > x_hi){
+                x_hi = tmp;
+            }
+            
+            tmp = piece.contour[i].y;
+            if (tmp < y_lo){
+                y_lo = tmp;
+            }
+            else if (tmp > y_hi){
+                y_hi = tmp;
+            }
+            
+        }
+        
+        
+        // now create the mask and cropped image based on these new points
+        piece.mask = Mat::zeros(cv::Size(x_hi-x_lo,y_hi-y_lo),CV_8UC1); // check if off by one??
+        //piece.mask = Mat::zeros(src.size(),CV_8UC1);
+        
+        // adjust the mask/image size so it has the correct bounds
+        for (int i=0; i<piece.contour.size(); i++){
+            piece.contour[i].x -= x_lo;
+            piece.contour[i].y -= y_lo;
+        }
+        
+        // set the image
+        cv::Rect myROI(x_lo, y_lo, x_hi-x_lo, y_hi-y_lo);
+        piece.originalImage = src(myROI);
+        piece.mask = contourOut(myROI);
+        
+        // output for debugging, not actually meant to reaturn mat objects
+        dst = piece.originalImage.clone();
+        dst = piece.mask.clone();
+        
+        // that's it! We set the contour list, cropped image, and mask image for the piece;
+        // do the edge calculations and whatnot in another function.
+        
     }
     
-    
-    
     // OLD output was an image, this is what it would be segmented
-    dst = contourOut.clone(); // would replace output dst image with new threshold
-    
-    
-    
-    //dst = Mat::zeros(src.size(), CV_8UC1);
+    //dst = contourOut.clone(); // would replace output dst image with new threshold
     
 }
 
