@@ -29,10 +29,16 @@ using namespace std;
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
-    Vector<JSVpuzzlePiece> *puzzlePieces;
+    NSMutableArray *puzzlePieces = [[NSMutableArray alloc]init];
+    
+    
+    // test (yes, the below works as it should....)
+    //JSVpuzzlePiece *test = [[JSVpuzzlePiece alloc] init];
+    //[puzzlePieces addObject: test];
+    
     
     // should segment and create individual puzzlePiece objects for each puzle piece
-    [self segmentPiecesFromBackground:inputM withPieces:*puzzlePieces withDst: sansBackground];
+    [self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
     
     // now for each of these found puzzle pieces, create the edge objects/information
     // and figure out their geometry
@@ -48,6 +54,8 @@ using namespace std;
     // of each puzzle piece, and verifying the geometry matches etc.
     
     // return the result
+    JSVpuzzlePiece *piece = puzzlePieces[2];
+    sansBackground = piece.originalImage.clone();
     return MatToUIImage(sansBackground);
 }
 
@@ -81,7 +89,7 @@ using namespace std;
 // #####################################################################################
 
 
-+ (void) segmentPiecesFromBackground: (Mat &) src withPieces: (Vector<JSVpuzzlePiece> &) puzzleVector withDst: (Mat &) dst{
++ (void) segmentPiecesFromBackground: (Mat &) src withPieces: (NSMutableArray *) puzzleArray withDst: (Mat &) dst{
     
     // at first assume the background is one consistent color
     // later, we can try to detect this color.
@@ -143,7 +151,7 @@ using namespace std;
         NSLog(@"ISSUE IS HERE in trying to allocate/create the puzzlePiece object,\nLine 146 of 'JSVopenCV.mm'\n");
         JSVpuzzlePiece *piece = [[JSVpuzzlePiece alloc] init];
         piece.contour = contours[i];
-        puzzleVector.push_back(*piece); // THIS IS THE BAD LINE, something isn't right...
+        [puzzleArray addObject: piece]; // THIS IS THE BAD LINE, something isn't right...
         
         
         // now HERE crop the piece down to the bounding box of just the contour filled area,
@@ -177,7 +185,6 @@ using namespace std;
         
         // now create the mask and cropped image based on these new points
         piece.mask = Mat::zeros(cv::Size(x_hi-x_lo,y_hi-y_lo),CV_8UC1); // check if off by one??
-        //piece.mask = Mat::zeros(src.size(),CV_8UC1);
         
         // adjust the mask/image size so it has the correct bounds
         for (int i=0; i<piece.contour.size(); i++){
@@ -192,7 +199,6 @@ using namespace std;
         
         // output for debugging, not actually meant to reaturn mat objects
         dst = piece.originalImage.clone();
-        dst = piece.mask.clone();
         
         // that's it! We set the contour list, cropped image, and mask image for the piece;
         // do the edge calculations and whatnot in another function.
