@@ -43,8 +43,8 @@ using namespace std;
     // now for each of these found puzzle pieces, create the edge objects/information
     // and figure out their geometry
     //sansBackground = Mat::zeros(inputM.size(), CV_8U);
-    //for (int i=0; i<puzzlePieces->size(); i++){
-    for (int i=0; i<1; i++){
+    for (int i=0; i< [puzzlePieces count]; i++){
+//    for (int i=0; i<1; i++){
         NSLog(@"Output puzzle peice #%i",i);
         // draw the contour from here...
         
@@ -81,6 +81,18 @@ using namespace std;
     }
     UIImage *output = MatToUIImage(binary);
     return output;
+}
+
++ (NSArray *) segmentPiecesFromBackground: (UIImage *) input {
+    
+    
+    NSMutableArray *puzzlePieces = [[NSMutableArray alloc]init];
+    Mat inputM;
+    Mat sansBackground;
+    UIImageToMat(input,inputM);
+    [self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
+    return [NSArray arrayWithArray:puzzlePieces];
+
 }
 
 
@@ -120,7 +132,7 @@ using namespace std;
     NSLog(@"Contours: %lu", contours.size());
     Mat contourOut = Mat::zeros(dst.size(),CV_8UC1);
     for (int i=0; i< contours.size(); i++){
-        //drawContours(contourOut, contours, i, 200, CV_FILLED, 8, hierarchy);
+        //drawContours(contourOut, contours, i, 200, CV_F@enuILLED, 8, hierarchy);
         int area = contourArea(contours[i]);
         if (area >50000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
@@ -148,7 +160,6 @@ using namespace std;
         } 
         
         // now create the additional PuzzlePiece objects.
-        NSLog(@"ISSUE IS HERE in trying to allocate/create the puzzlePiece object,\nLine 146 of 'JSVopenCV.mm'\n");
         JSVpuzzlePiece *piece = [[JSVpuzzlePiece alloc] init];
         piece.contour = contours[i];
         [puzzleArray addObject: piece]; // THIS IS THE BAD LINE, something isn't right...
@@ -209,6 +220,16 @@ using namespace std;
     //dst = contourOut.clone(); // would replace output dst image with new threshold
     
 }
+
+
+///
+
+// #####################################################################################
+// SIFT
+// #####################################################################################
+
+
+
 
 
 @end

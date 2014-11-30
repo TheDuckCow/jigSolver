@@ -9,6 +9,11 @@
 
 #import "JSVopenCV.h"
 #import "ViewController.h"
+#import "JSVpuzzlePiece.h"
+#import "opencv2/highgui/ios.h"
+#import <opencv2/opencv.hpp>
+
+using namespace cv;
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *swer;
@@ -27,8 +32,15 @@
     NSArray *scrambledRectanlges = @[@"IMG_2773.JPG",@"IMG_2775.JPG",@"IMG_2776.JPG",@"IMG_2778.JPG",@"IMG_2779.JPG",@"IMG_2781.JPG", @"IMG_2781.JPG"];
 
     
-    self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
+//    self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
+    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledPieces[0]]];
+    
+    
+    
+    JSVpuzzlePiece *piece = segmentedPieces[0];
+    Mat sansBackground = piece.originalImage.clone();
+    self.swer.image = MatToUIImage(sansBackground);
     
     //self.swer.image =[UIImage imageNamed:scrambled[0]];
     
@@ -39,7 +51,7 @@
     
 }
 - (IBAction)pressBack:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
