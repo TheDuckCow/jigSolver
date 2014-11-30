@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cdX-g1-5np">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -20,6 +20,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dco-tJ-MD6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQL-WA-pgL">
+                                <rect key="frame" x="16" y="11" width="46" height="30"/>
+                                <state key="normal" title="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressBack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7BF-Gb-vjh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -31,12 +40,94 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backButton" destination="tQL-WA-pgL" id="CZT-Os-u1e"/>
                         <outlet property="swer" destination="dco-tJ-MD6" id="ROR-0t-8po"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="237"/>
+            <point key="canvasLocation" x="192" y="441"/>
+        </scene>
+        <!--puzzleSolveController-->
+        <scene sceneID="Shf-yN-bBj">
+            <objects>
+                <viewController title="puzzleSolveController" id="cdX-g1-5np" customClass="JSVpuzzleSolveController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sjn-47-mUb"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ump-Wz-TTf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nhA-BW-9ib">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37Z-2k-Qqf">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" red="0.66139360494131683" green="1" blue="0.84981633532893353" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="OOW-Yh-zvP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tPk-G8-fmH"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hv9-g4-0gQ">
+                                <rect key="frame" x="16" y="530" width="71" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="Jvn-BE-CCi"/>
+                                    <constraint firstAttribute="height" constant="30" id="OAX-x0-c3W"/>
+                                </constraints>
+                                <state key="normal" title="take pic">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fh-il-Gor">
+                                <rect key="frame" x="258" y="529" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4Uh-sy-u0X"/>
+                                    <constraint firstAttribute="width" constant="46" id="GkB-vv-CKM"/>
+                                </constraints>
+                                <state key="normal" title="debug">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="f7Q-ZW-I4g"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1St-Dl-3an">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="521"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tim, press debug to do stuff.. or change initial view cont on storyboard" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TP-Pc-cuo">
+                                <rect key="frame" x="156" y="7" width="157" height="136"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="4fh-il-Gor" secondAttribute="bottom" constant="9" id="Drl-Db-hNL"/>
+                            <constraint firstAttribute="trailing" secondItem="37Z-2k-Qqf" secondAttribute="trailing" id="Omi-rp-WId"/>
+                            <constraint firstAttribute="trailing" secondItem="4fh-il-Gor" secondAttribute="trailing" constant="16" id="bpA-jo-lPx"/>
+                            <constraint firstAttribute="trailing" secondItem="1St-Dl-3an" secondAttribute="trailing" id="eyg-pl-NEg"/>
+                            <constraint firstItem="1St-Dl-3an" firstAttribute="leading" secondItem="nhA-BW-9ib" secondAttribute="leading" id="jT0-vr-ytr"/>
+                            <constraint firstAttribute="bottom" secondItem="Hv9-g4-0gQ" secondAttribute="bottom" constant="8" id="nVY-Ha-9Lb"/>
+                            <constraint firstItem="Hv9-g4-0gQ" firstAttribute="leading" secondItem="nhA-BW-9ib" secondAttribute="leading" constant="16" id="nrP-aa-ADb"/>
+                            <constraint firstAttribute="bottom" secondItem="1St-Dl-3an" secondAttribute="bottom" constant="47" id="oAm-I1-zlz"/>
+                            <constraint firstItem="37Z-2k-Qqf" firstAttribute="leading" secondItem="nhA-BW-9ib" secondAttribute="leading" id="sP7-2k-3Pz"/>
+                            <constraint firstItem="1St-Dl-3an" firstAttribute="top" secondItem="nhA-BW-9ib" secondAttribute="top" id="uaV-DO-tKP"/>
+                            <constraint firstAttribute="bottom" secondItem="37Z-2k-Qqf" secondAttribute="bottom" id="w0w-EE-xUf"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="bottomLabel" destination="37Z-2k-Qqf" id="I1A-y6-Ugj"/>
+                        <outlet property="imgView" destination="1St-Dl-3an" id="uO8-MU-zsr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFq-XA-vyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="659" y="6"/>
         </scene>
     </scenes>
 </document>

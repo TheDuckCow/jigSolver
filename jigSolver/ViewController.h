@@ -13,6 +13,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UIImageView* imageView;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 @end
 

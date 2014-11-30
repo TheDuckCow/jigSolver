@@ -38,6 +38,9 @@
     
     
 }
+- (IBAction)pressBack:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
