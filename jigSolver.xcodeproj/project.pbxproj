@@ -34,7 +34,7 @@
 		14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */; };
 		14DD94EE1A1B143B001E6E64 /* test1_source.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14DD94ED1A1B143B001E6E64 /* test1_source.jpg */; };
 		385074F7670548A6D1FC3608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD4C8D9F22DFD5AB9C7D759 /* libPods.a */; };
-		FD7148721A2BBAAE004801F8 /* JSVOpenCVSIFT.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.m */; };
+		FD7148721A2BBAAE004801F8 /* JSVOpenCVSIFT.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 		63F76E6962E4F776AA6988A6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B0998364AE67032C98E71081 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FD7148701A2BBAAE004801F8 /* JSVOpenCVSIFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVOpenCVSIFT.h; sourceTree = "<group>"; };
-		FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSVOpenCVSIFT.m; sourceTree = "<group>"; };
+		FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JSVOpenCVSIFT.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +218,7 @@
 				1455DCC41A1AC30E008264FF /* JSVopenCV.h */,
 				1455DCC51A1AC30E008264FF /* JSVopenCV.mm */,
 				FD7148701A2BBAAE004801F8 /* JSVOpenCVSIFT.h */,
-				FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.m */,
+				FD7148711A2BBAAE004801F8 /* JSVOpenCVSIFT.mm */,
 			);
 			name = OpenCV;
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1455DCC61A1AC30E008264FF /* JSVopenCV.mm in Sources */,
-				FD7148721A2BBAAE004801F8 /* JSVOpenCVSIFT.m in Sources */,
+				FD7148721A2BBAAE004801F8 /* JSVOpenCVSIFT.mm in Sources */,
 				14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */,
 				14A687601A168E15009A188C /* ViewController.mm in Sources */,
 				144FFAAC1A2B5F6200267086 /* JSVpuzzleSolveController.m in Sources */,

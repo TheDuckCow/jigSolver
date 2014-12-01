@@ -12,6 +12,7 @@
 #import "JSVpuzzlePiece.h"
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
+#import "JSVOpenCVSIFT.h"
 
 using namespace cv;
 
@@ -36,11 +37,12 @@ using namespace cv;
     
     NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledPieces[0]]];
     
+//    [JSVOpenCVSIFT matchPieceWithSolution:segmentedPieces[0] withSolution:[UIImage imageNamed: solutions[0]]];
     
-    
-    JSVpuzzlePiece *piece = segmentedPieces[0];
-    Mat sansBackground = piece.originalImage.clone();
-    self.swer.image = MatToUIImage(sansBackground);
+    JSVpuzzlePiece *piece = segmentedPieces[1];
+    UIImage * match = [JSVOpenCVSIFT matchPieceWithSolution:piece withSolution:[UIImage imageNamed:solutions[0]]];
+//    self.swer.image = MatToUIImage(sansBackground);
+    self.swer.image = match;
     
     //self.swer.image =[UIImage imageNamed:scrambled[0]];
     

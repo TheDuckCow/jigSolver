@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
+@class JSVpuzzlePiece;
 @interface JSVOpenCVSIFT : NSObject
+//Subject to change
++(UIImage *) matchPieceWithSolution:(JSVpuzzlePiece *) piece withSolution: (UIImage *) solution;
++(JSVpuzzlePiece *) largestPuzzlePieceInPieces:(NSArray *) pieces;
 
 @end
