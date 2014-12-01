@@ -55,7 +55,7 @@ using namespace std;
     
     // return the result
     JSVpuzzlePiece *piece = puzzlePieces[2];
-    sansBackground = piece.originalImage.clone();
+    sansBackground = piece.mask.clone();
     return MatToUIImage(sansBackground);
 }
 
@@ -153,7 +153,6 @@ using namespace std;
     NSLog(@"Contours final (number of pieces): %lu", contours.size());
     contourOut = Mat::zeros(dst.size(),CV_8UC1);
     for (int i=0; i< contours.size(); i++){
-        //drawContours(contourOut, contours, i, 200, CV_FILLED, 8, hierarchy);
         int area = contourArea(contours[i]);
         if (area >50000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
@@ -172,10 +171,10 @@ using namespace std;
         int y_lo = piece.contour[0].y;
         int y_hi = piece.contour[0].y;
         
-        for (int i=0; i< piece.contour.size(); i++){
+        for (int j=0; j< piece.contour.size(); j++){
             
             //NSLog(@"x:%i %i,y: %i %i",x_lo,x_hi,y_lo,y_hi);
-            int tmp = piece.contour[i].x;
+            int tmp = piece.contour[j].x;
             if (tmp < x_lo){
                 x_lo = tmp;
             }
@@ -183,7 +182,7 @@ using namespace std;
                 x_hi = tmp;
             }
             
-            tmp = piece.contour[i].y;
+            tmp = piece.contour[j].y;
             if (tmp < y_lo){
                 y_lo = tmp;
             }
@@ -198,15 +197,29 @@ using namespace std;
         piece.mask = Mat::zeros(cv::Size(x_hi-x_lo,y_hi-y_lo),CV_8UC1); // check if off by one??
         
         // adjust the mask/image size so it has the correct bounds
-        for (int i=0; i<piece.contour.size(); i++){
-            piece.contour[i].x -= x_lo;
-            piece.contour[i].y -= y_lo;
+        for (int j=0; j<piece.contour.size(); j++){
+            piece.contour[j].x -= x_lo;
+            piece.contour[j].y -= y_lo;
         }
         
         // set the image
         cv::Rect myROI(x_lo, y_lo, x_hi-x_lo, y_hi-y_lo);
         piece.originalImage = src(myROI);
         piece.mask = contourOut(myROI);
+        
+        
+        // now REDO the contours
+        
+        vector<vector<cv::Point>> contoursB;
+        vector<Vec4i> hierarchyB;
+        
+        findContours(piece.mask,contoursB, hierarchyB, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+        piece.mask = Mat::zeros(piece.mask.size(), CV_8UC1);
+        // COMMENT OUT THIS LINE, don't actually want this "edge" instead of mask
+        NSLog(@"dont' forget to comment out the next line, ~ 220 of JSVopenCV.mm");
+        drawContours(piece.mask, contoursB, 0, 255, 2, 8, hierarchyB);
+        
+        piece.contour = contoursB[0];
         
         // output for debugging, not actually meant to reaturn mat objects
         dst = piece.originalImage.clone();
