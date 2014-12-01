@@ -216,9 +216,10 @@ using namespace std;
         findContours(piece.mask,contoursB, hierarchyB, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
         piece.mask = Mat::zeros(piece.mask.size(), CV_8UC1);
         // COMMENT OUT THIS LINE, don't actually want this "edge" instead of mask
-        NSLog(@"dont' forget to comment out the next line, ~ 220 of JSVopenCV.mm");
-        drawContours(piece.mask, contoursB, 0, 255, 2, 8, hierarchyB);
+        //NSLog(@"dont' forget to comment out the next line, ~ 220 of JSVopenCV.mm");
+        drawContours(piece.mask, contoursB, 0, 255, CV_FILLED, 8, hierarchyB);
         
+        // FINAL contours.
         piece.contour = contoursB[0];
         
         // output for debugging, not actually meant to reaturn mat objects
