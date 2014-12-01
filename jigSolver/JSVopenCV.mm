@@ -214,6 +214,7 @@ using namespace std;
         // that's it! We set the contour list, cropped image, and mask image for the piece;
         // do the edge calculations and whatnot in another function.
         
+        
     }
     
     // OLD output was an image, this is what it would be segmented
