@@ -33,6 +33,12 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     
     JSVpuzzlePiece * solutionPiece = [self largestPuzzlePieceInPieces:solutionArray];
     
+    
+    JSVpuzzlePiece * temp = piece;
+    piece = solutionPiece;
+    solutionPiece = temp;
+    
+    
     vector<KeyPoint> keyPointsPiece, keyPointsSolution;
 	Mat descriptorPiece, descriptorSolution;
     
@@ -47,10 +53,10 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
 
     Mat img_matches;
 
-    drawMatches(piece.originalImage, keyPointsPiece, solutionPiece.originalImage, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::DEFAULT );
+    drawMatches(piece.mask, keyPointsPiece, solutionPiece.mask, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
     
     
-    return MatToUIImage(piece.originalImage.clone());
+    return MatToUIImage(img_matches.clone());
 }
 
 
@@ -61,9 +67,6 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     Mat beforeDescriptors;
     detector.detect(puzzle.originalImage, keypoints);
     extractor.compute(puzzle.originalImage, keypoints, beforeDescriptors);
-    
-    descriptors = beforeDescriptors;
-    return;
     
     descriptors = Mat();
 //    double rows = puzzle.mask.rows;
@@ -77,8 +80,7 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
 //        if (x < cols && y < rows) {
 //            uchar color = puzzle.mask.at<Vec3b>(y,x)[0];
 //            if (color == 0 || (x < cols * 0.05) || (x > cols * 0.95) || (y < rows * 0.05) || (y > rows * 0.95)) {
-        NSLog(@"%f", pointPolygonTest(puzzle.contour, keypoints[i].pt, true));
-            if (pointPolygonTest(puzzle.contour, keypoints[i].pt, false) <= 0){
+            if (pointPolygonTest(puzzle.contour, keypoints[i].pt, true) <= 20){
                 index_to_remove.push_back(i);
             }else {
                 descriptors.push_back(beforeDescriptors.row(i));
