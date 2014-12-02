@@ -29,6 +29,7 @@ using namespace std;
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
+    UIImageToMat(input,sansBackground);
     NSMutableArray *puzzlePieces = [[NSMutableArray alloc]init];
     
     
@@ -38,7 +39,11 @@ using namespace std;
     
     
     // should segment and create individual puzzlePiece objects for each puzle piece
+    
     [self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
+    JSVpuzzlePiece *piece = puzzlePieces[0];
+    sansBackground = piece.originalImage.clone();
+    
     
     // now for each of these found puzzle pieces, create the edge objects/information
     // and figure out their geometry
@@ -49,13 +54,12 @@ using namespace std;
         // draw the contour from here...
         
     }
+     
     
     // now do whatever it is to "solve" the puzzle, ie template matching using the innerRectable Mat
     // of each puzzle piece, and verifying the geometry matches etc.
     
     // return the result
-    JSVpuzzlePiece *piece = puzzlePieces[2];
-    sansBackground = piece.mask.clone();
     return MatToUIImage(sansBackground);
 }
 
@@ -80,6 +84,18 @@ using namespace std;
         }
     }
     UIImage *output = MatToUIImage(binary);
+    return output;
+}
+
+// not currently used... 
++(NSMutableArray *) arrayOfPieces: (NSMutableArray *) pieces{
+    
+    NSMutableArray *output = [[NSMutableArray alloc]init];
+    for (int i=0; i< [pieces count]; i++){
+        JSVpuzzlePiece *piece = pieces[i];
+        [output addObject:MatToUIImage(piece.originalImage)];
+    }
+    
     return output;
 }
 

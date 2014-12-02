@@ -34,9 +34,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     JSVpuzzlePiece * solutionPiece = [self largestPuzzlePieceInPieces:solutionArray];
     
     
-    JSVpuzzlePiece * temp = piece;
-    piece = solutionPiece;
-    solutionPiece = temp;
+    //JSVpuzzlePiece * temp = piece;
+    //piece = solutionPiece;
+    //solutionPiece = temp;
     
     
     vector<KeyPoint> keyPointsPiece, keyPointsSolution;
@@ -52,9 +52,8 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     [self findGoodMatchesWithDescriptorPiece:descriptorPiece descriptorSolution:descriptorSolution keyPointsPiece:keyPointsPiece keyPointsSolution:keyPointsSolution goodMatchPiece:goodMatchPiece goodMatchSolution:goodMatchSolution matches:matches];
 
     Mat img_matches;
-
-    drawMatches(piece.mask, keyPointsPiece, solutionPiece.mask, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
     
+    drawMatches(piece.originalImage, keyPointsPiece, solutionPiece.originalImage, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
     
     return MatToUIImage(img_matches.clone());
 }
