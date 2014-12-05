@@ -87,7 +87,7 @@ using namespace std;
     return output;
 }
 
-// not currently used... 
+// not currently used...
 +(NSMutableArray *) arrayOfPieces: (NSMutableArray *) pieces{
     
     NSMutableArray *output = [[NSMutableArray alloc]init];
