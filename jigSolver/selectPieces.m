@@ -10,6 +10,7 @@
 
 @interface selectPieces ()
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
+@property BOOL ready;
 - (IBAction)navNext:(id)sender;
 
 @end
@@ -18,22 +19,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //NSLog(@"Select peices VC");
+    
+    // slightly fade out and initial set the background iamge... preparing to run segmentation
+    // possibly put a loading sign/animation of some sort until it's ready (ani: run in background)
     self.imgView.image = [JSVsingleton sharedObj].piecesImg;
-    
-    // INITIALLY attempt to segment all the pieces.
-    // maybe start by auto assuming to use all,
-    // but can tap to remove them thereafter
-    UIImage *piecesOrig = [JSVsingleton sharedObj].piecesImg;
-    self.imgView.image = [JSVopenCV segmentFromBackground:piecesOrig];
-    
+    self.imgView.alpha = 0.25;
+    self.ready = NO;
     
     
     //[JSVopenCV solvePuzzle:self.imgViewORIG.image withOriginal: self.imgViewSOL.image];
     // pass in the NSMutableArray for pieces and do segmentation and run that part.
     // could do based on a floodfill algorithm on binary image instead of segmenting everything!
     
+    
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    // get B&W of all pieces found, then allow for taps to (de)select pieces
+    UIImage *piecesOrig = [JSVsingleton sharedObj].piecesImg;
+    self.imgView.image = [JSVopenCV segmentFromBackground:piecesOrig];
+    self.imgView.alpha = 1;
+    self.ready = YES;
+
     
 }
 
@@ -54,7 +63,7 @@
 
 - (IBAction)navNext:(id)sender {
     
-    UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"finalResult"];
+    UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"checkPieces"];
     [self.navigationController pushViewController:nextView animated:YES];
 }
 @end

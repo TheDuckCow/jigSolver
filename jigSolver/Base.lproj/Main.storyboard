@@ -102,6 +102,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kvz-HJ-Yko">
                                 <rect key="frame" x="0.0" y="84" width="320" height="143"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFK-Oc-0w9">
+                                <rect key="frame" x="0.0" y="424" width="320" height="56"/>
+                                <color key="backgroundColor" red="0.66139360489999999" green="1" blue="0.8498163353" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pe9-Xu-LnF">
                                 <rect key="frame" x="16" y="52" width="288" height="26"/>
                                 <state key="normal" title="Take Image of Solution (the &quot;box&quot;)">
@@ -121,7 +128,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQN-y5-63f">
-                                <rect key="frame" x="16" y="442" width="288" height="30"/>
+                                <rect key="frame" x="16" y="437" width="288" height="30"/>
                                 <state key="normal" title="Use included images">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -205,6 +212,52 @@
             </objects>
             <point key="canvasLocation" x="2850" y="-926"/>
         </scene>
+        <!--Check Pieces-->
+        <scene sceneID="lH0-vf-ihZ">
+            <objects>
+                <viewController storyboardIdentifier="checkPieces" id="VUm-Ih-Yx1" customClass="checkPieces" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O4a-nl-84S"/>
+                        <viewControllerLayoutGuide type="bottom" id="MoT-DZ-oDm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g9d-Nw-1Qd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gv5-Gd-3hw">
+                                <rect key="frame" x="0.0" y="424" width="320" height="56"/>
+                                <color key="backgroundColor" red="0.66139360489999999" green="1" blue="0.8498163353" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NO9-6T-VC8">
+                                <rect key="frame" x="16" y="437" width="46" height="30"/>
+                                <state key="normal" title="help">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uq6-ro-CWN">
+                                <rect key="frame" x="82" y="433" width="156" height="37"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Check Pieces" id="Dtn-yo-O2T">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="gZ9-ok-T2j">
+                            <connections>
+                                <action selector="navNext:" destination="VUm-Ih-Yx1" id="cPe-kE-hbx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ckD-ZN-PMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3251" y="-926"/>
+        </scene>
         <!--Final Result-->
         <scene sceneID="fer-bv-LmH">
             <objects>
@@ -224,7 +277,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Each piece has some possible solutions, either tap the correct oen for each peice or select next for auto solve" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCZ-CI-ncn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is the final result, results may vary" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCZ-CI-ncn">
                                 <rect key="frame" x="16" y="424" width="288" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -246,7 +299,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1J-Pw-AJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3259" y="-926"/>
+            <point key="canvasLocation" x="3663" y="-926"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="JED-a3-LGx">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="agm-zK-H01" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2xc-R1-bCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3184" y="-314"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dPM-PG-ZW3">
+            <objects>
+                <viewController id="eCN-Pc-zCC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jlh-M0-nhm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pta-S4-uuk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3bD-p6-j3f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Each piece has some possible solutions, either tap the correct oen for each peice or select next for auto solve" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n0-GK-fhR">
+                                <rect key="frame" x="16" y="121" width="256" height="119"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1wT-Cd-gHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3525" y="-327"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="KgQ-d2-PTc">
@@ -287,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVG-t4-mPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6089" y="-926"/>
+            <point key="canvasLocation" x="6901" y="-926"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

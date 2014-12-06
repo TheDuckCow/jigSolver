@@ -119,9 +119,22 @@ using namespace std;
 // call for in selectPieces, raw segmenting the background
 + (UIImage *) segmentFromBackground: (UIImage *) src{
     
+    Mat srcMat;
+    Mat dst;
+    UIImageToMat(src,srcMat);
     
+    //pre-segmentation
+    Mat gray;
+    cvtColor(srcMat,gray,CV_RGB2GRAY);
+    blur(gray, gray, cv::Size(5,5));
     
-    return src;
+    // dynamic threshold of some kind?
+    threshold(gray,dst,60,255,THRESH_BINARY);
+    blur(dst, dst, cv::Size(5,5));
+    
+    // ultiamtely, should save puzzle peice objects to singleton and have intermediate
+    // image shown here
+    return MatToUIImage(dst);
 }
 
 
