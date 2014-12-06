@@ -20,7 +20,11 @@
 		143F4B4D1A1B350B00E83FC6 /* IMG_2788.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 143F4B3F1A1B350B00E83FC6 /* IMG_2788.JPG */; };
 		144FFAAC1A2B5F6200267086 /* JSVpuzzleSolveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 144FFAAB1A2B5F6200267086 /* JSVpuzzleSolveController.m */; };
 		1455DCC61A1AC30E008264FF /* JSVopenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1455DCC51A1AC30E008264FF /* JSVopenCV.mm */; };
-		145C94C31A1690020055F945 /* lena.png in Resources */ = {isa = PBXBuildFile; fileRef = 145C94C21A1690020055F945 /* lena.png */; };
+		146A46831A3153C3003B1A85 /* homeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46821A3153C3003B1A85 /* homeScreen.m */; };
+		146A46861A3382CF003B1A85 /* takePictures.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46851A3382CF003B1A85 /* takePictures.m */; };
+		146A46891A338E61003B1A85 /* selectPieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46881A338E61003B1A85 /* selectPieces.m */; };
+		146A468C1A339251003B1A85 /* JSVsingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A468B1A339251003B1A85 /* JSVsingleton.m */; };
+		146A468F1A33B4CA003B1A85 /* finalResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A468E1A33B4CA003B1A85 /* finalResult.m */; };
 		14A6875A1A168E15009A188C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A687591A168E15009A188C /* main.m */; };
 		14A6875D1A168E15009A188C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6875C1A168E15009A188C /* AppDelegate.m */; };
 		14A687601A168E15009A188C /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14A6875F1A168E15009A188C /* ViewController.mm */; };
@@ -63,7 +67,16 @@
 		144FFAAB1A2B5F6200267086 /* JSVpuzzleSolveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSVpuzzleSolveController.m; sourceTree = "<group>"; };
 		1455DCC41A1AC30E008264FF /* JSVopenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVopenCV.h; sourceTree = "<group>"; };
 		1455DCC51A1AC30E008264FF /* JSVopenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JSVopenCV.mm; sourceTree = "<group>"; };
-		145C94C21A1690020055F945 /* lena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lena.png; sourceTree = "<group>"; };
+		146A46811A3153C3003B1A85 /* homeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homeScreen.h; sourceTree = "<group>"; };
+		146A46821A3153C3003B1A85 /* homeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeScreen.m; sourceTree = "<group>"; };
+		146A46841A3382CF003B1A85 /* takePictures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = takePictures.h; sourceTree = "<group>"; };
+		146A46851A3382CF003B1A85 /* takePictures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = takePictures.m; sourceTree = "<group>"; };
+		146A46871A338E61003B1A85 /* selectPieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = selectPieces.h; sourceTree = "<group>"; };
+		146A46881A338E61003B1A85 /* selectPieces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = selectPieces.m; sourceTree = "<group>"; };
+		146A468A1A339251003B1A85 /* JSVsingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVsingleton.h; sourceTree = "<group>"; };
+		146A468B1A339251003B1A85 /* JSVsingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSVsingleton.m; sourceTree = "<group>"; };
+		146A468D1A33B4CA003B1A85 /* finalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = finalResult.h; sourceTree = "<group>"; };
+		146A468E1A33B4CA003B1A85 /* finalResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = finalResult.m; sourceTree = "<group>"; };
 		14A687541A168E15009A188C /* jigSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jigSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A687581A168E15009A188C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A687591A168E15009A188C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -164,11 +177,12 @@
 			children = (
 				14A6875B1A168E15009A188C /* AppDelegate.h */,
 				14A6875C1A168E15009A188C /* AppDelegate.m */,
-				145C94C21A1690020055F945 /* lena.png */,
 				FD71486F1A2BBA78004801F8 /* ViewController */,
 				FD71486D1A2BBA5C004801F8 /* OpenCV */,
 				FD71486E1A2BBA69004801F8 /* Puzzle */,
 				143F4B311A1B350B00E83FC6 /* testSources */,
+				146A468A1A339251003B1A85 /* JSVsingleton.h */,
+				146A468B1A339251003B1A85 /* JSVsingleton.m */,
 				14A687611A168E15009A188C /* Main.storyboard */,
 				14A687641A168E15009A188C /* Images.xcassets */,
 				14A687661A168E15009A188C /* LaunchScreen.xib */,
@@ -239,6 +253,14 @@
 				14A6875F1A168E15009A188C /* ViewController.mm */,
 				144FFAAA1A2B5F6200267086 /* JSVpuzzleSolveController.h */,
 				144FFAAB1A2B5F6200267086 /* JSVpuzzleSolveController.m */,
+				146A46811A3153C3003B1A85 /* homeScreen.h */,
+				146A46821A3153C3003B1A85 /* homeScreen.m */,
+				146A46841A3382CF003B1A85 /* takePictures.h */,
+				146A46851A3382CF003B1A85 /* takePictures.m */,
+				146A46871A338E61003B1A85 /* selectPieces.h */,
+				146A46881A338E61003B1A85 /* selectPieces.m */,
+				146A468D1A33B4CA003B1A85 /* finalResult.h */,
+				146A468E1A33B4CA003B1A85 /* finalResult.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -344,7 +366,6 @@
 				143F4B461A1B350B00E83FC6 /* IMG_2779.JPG in Resources */,
 				143F4B4A1A1B350B00E83FC6 /* IMG_2784.JPG in Resources */,
 				14A687651A168E15009A188C /* Images.xcassets in Resources */,
-				145C94C31A1690020055F945 /* lena.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,12 +416,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146A46831A3153C3003B1A85 /* homeScreen.m in Sources */,
 				1455DCC61A1AC30E008264FF /* JSVopenCV.mm in Sources */,
 				FD7148721A2BBAAE004801F8 /* JSVOpenCVSIFT.mm in Sources */,
 				14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */,
+				146A46891A338E61003B1A85 /* selectPieces.m in Sources */,
+				146A468F1A33B4CA003B1A85 /* finalResult.m in Sources */,
 				14A687601A168E15009A188C /* ViewController.mm in Sources */,
+				146A46861A3382CF003B1A85 /* takePictures.m in Sources */,
 				144FFAAC1A2B5F6200267086 /* JSVpuzzleSolveController.m in Sources */,
 				14A6875D1A168E15009A188C /* AppDelegate.m in Sources */,
+				146A468C1A339251003B1A85 /* JSVsingleton.m in Sources */,
 				14A6875A1A168E15009A188C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

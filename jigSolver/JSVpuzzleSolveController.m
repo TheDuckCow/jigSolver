@@ -14,6 +14,7 @@
 - (IBAction)generalButton:(id)sender;
 - (IBAction) showCameraUI;
 - (IBAction)solveAction:(id)sender;
+- (IBAction)backButton:(id)sender;
 @property int state;
 @property (strong, nonatomic) IBOutlet UILabel *helpLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewSOL;
@@ -68,6 +69,10 @@
     [self solve];
 }
 
+- (IBAction)backButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)generalButton:(id)sender {
     
     if (self.state <= 1){
@@ -116,7 +121,7 @@
     
     cameraUI.delegate = delegate;
     
-    [controller presentModalViewController: cameraUI animated: YES];
+    [controller presentViewController:cameraUI animated:YES completion:nil];
     return YES;
 }
 

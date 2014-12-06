@@ -116,7 +116,16 @@ using namespace std;
 // PRIVATE METHODS
 // #####################################################################################
 
+// call for in selectPieces, raw segmenting the background
++ (UIImage *) segmentFromBackground: (UIImage *) src{
+    
+    
+    
+    return src;
+}
 
+
+// the OLD method for semgenting pieces, returns/creates list of puzzle piece objects
 + (void) segmentPiecesFromBackground: (Mat &) src withPieces: (NSMutableArray *) puzzleArray withDst: (Mat &) dst{
     
     // at first assume the background is one consistent color
