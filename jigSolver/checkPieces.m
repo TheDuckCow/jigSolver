@@ -7,9 +7,16 @@
 //
 
 #import "checkPieces.h"
+#include "PageContentViewController.h"
+#include "JSVsingleton.h"
 
 @interface checkPieces ()
 - (IBAction)navNext:(id)sender;
+- (IBAction)startWalkthrough:(id)sender;
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong, nonatomic) NSArray *pageTitles;
+@property (strong, nonatomic) NSArray *pageImages;
+
 @end
 
 @implementation checkPieces
@@ -17,12 +24,99 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Create the data model
+    _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png"];
+    
+    // Create page view controller
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    self.pageViewController.dataSource = self;
+    
+    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    // Change the size of page view controller
+    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50);
+    
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+    
+    
 }
+
+- (IBAction)startWalkthrough:(id)sender {
+    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+}
+
+- (PageContentViewController *)viewControllerAtIndex:(NSUInteger)index
+{
+    if (([self.pageTitles count] == 0) || (index >= [self.pageTitles count])) {
+        return nil;
+    }
+    
+    // Create a new view controller and pass suitable data.
+    PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
+    //pageContentViewController.pieceImg = [UIImage imageNamed:@"IMG_2775"];
+    //pageContentViewController.pieceImgView.image = [UIImage imageNamed:@"IMG_2775"];
+    pageContentViewController.pieceImgView.image = [JSVsingleton sharedObj].piecesImg; // change to indivual piece..
+    pageContentViewController.pageIndex = index;
+    
+    return pageContentViewController;
+}
+
+
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    NSLog(@"SLide: %i",index);
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return nil;
+    }
+    NSLog(@"Slide #: %i",index);
+    index++;
+    if (index == [[JSVsingleton sharedObj].pieces count]) {
+        return nil;
+    }
+    return [self viewControllerAtIndex:index];
+}
+
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+{
+    return [[JSVsingleton sharedObj].pieces count];
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
+    return 0;
+}
+
+
+//////////////////////////////////
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (IBAction)navNext:(id)sender {
     

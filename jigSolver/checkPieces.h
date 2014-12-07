@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface checkPieces : UIViewController
+@interface checkPieces : UIViewController <UIPageViewControllerDataSource>
 
 @end

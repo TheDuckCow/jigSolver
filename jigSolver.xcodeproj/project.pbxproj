@@ -34,6 +34,7 @@
 		14A687681A168E15009A188C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A687661A168E15009A188C /* LaunchScreen.xib */; };
 		14A687741A168E15009A188C /* jigSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A687731A168E15009A188C /* jigSolverTests.m */; };
 		14B4EC2B1A2996AF009F494A /* JSVpuzzlePiece.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */; };
+		14C5365D1A341A3700B6BF2B /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C5365C1A341A3700B6BF2B /* PageContentViewController.m */; };
 		14D5967F1A2D313B00566709 /* IMG_2773.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D5967E1A2D313B00566709 /* IMG_2773.png */; };
 		14D596831A2D326900566709 /* test1_source.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D596821A2D326900566709 /* test1_source.png */; };
 		14D596851A2D32CB00566709 /* IMG_2774.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D596841A2D32CB00566709 /* IMG_2774.png */; };
@@ -95,6 +96,8 @@
 		14A687731A168E15009A188C /* jigSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jigSolverTests.m; sourceTree = "<group>"; };
 		14B4EC291A2996AF009F494A /* JSVpuzzlePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVpuzzlePiece.h; sourceTree = "<group>"; };
 		14B4EC2A1A2996AF009F494A /* JSVpuzzlePiece.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JSVpuzzlePiece.mm; sourceTree = "<group>"; };
+		14C5365B1A341A3700B6BF2B /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		14C5365C1A341A3700B6BF2B /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
 		14D5967E1A2D313B00566709 /* IMG_2773.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_2773.png; sourceTree = "<group>"; };
 		14D596821A2D326900566709 /* test1_source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test1_source.png; sourceTree = "<group>"; };
 		14D596841A2D32CB00566709 /* IMG_2774.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_2774.png; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				146A46881A338E61003B1A85 /* selectPieces.m */,
 				146A46901A33BC96003B1A85 /* checkPieces.h */,
 				146A46911A33BC96003B1A85 /* checkPieces.m */,
+				14C5365B1A341A3700B6BF2B /* PageContentViewController.h */,
+				14C5365C1A341A3700B6BF2B /* PageContentViewController.m */,
 				146A468D1A33B4CA003B1A85 /* finalResult.h */,
 				146A468E1A33B4CA003B1A85 /* finalResult.m */,
 			);
@@ -430,6 +435,7 @@
 				146A468F1A33B4CA003B1A85 /* finalResult.m in Sources */,
 				14A687601A168E15009A188C /* ViewController.mm in Sources */,
 				146A46861A3382CF003B1A85 /* takePictures.m in Sources */,
+				14C5365D1A341A3700B6BF2B /* PageContentViewController.m in Sources */,
 				144FFAAC1A2B5F6200267086 /* JSVpuzzleSolveController.m in Sources */,
 				14A6875D1A168E15009A188C /* AppDelegate.m in Sources */,
 				146A468C1A339251003B1A85 /* JSVsingleton.m in Sources */,
