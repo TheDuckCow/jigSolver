@@ -107,7 +107,8 @@ using namespace std;
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
-    [self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
+    //[self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
+    [self createPiecesFromImage:input];
     return [NSArray arrayWithArray:puzzlePieces];
 
 }
@@ -269,7 +270,7 @@ using namespace std;
     for (int i=0; i< contours.size(); i++){
         //drawContours(contourOut, contours, i, 200, CV_F@enuILLED, 8, hierarchy);
         int area = contourArea(contours[i]);
-        if (area >50000){
+        if (area >100000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
         }
     }
