@@ -37,9 +37,8 @@ using namespace cv;
     
     //self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
-    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledPieces[0]]];
-    JSVpuzzlePiece *piece = segmentedPieces[1];
-    self.swer.image = MatToUIImage(piece.originalImage);
+    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledRectanlges[0]]];
+//    self.swer.image = MatToUIImage(piece.originalImage);
     
     
     Mat result;
