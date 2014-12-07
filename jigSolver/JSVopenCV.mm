@@ -107,7 +107,9 @@ using namespace std;
     UIImageToMat(input,inputM);
     //[self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
     [self createPiecesFromImage:input];
-    return [JSVsingleton sharedObj].pieces;
+    NSArray *tmp = [[NSArray alloc] initWithArray:[JSVsingleton sharedObj].pieces];
+    
+    return tmp;
 
 }
 
