@@ -131,7 +131,7 @@ using namespace std;
     blur(gray, gray, cv::Size(5,5));
     
     // dynamic threshold of some kind?
-    threshold(gray,dst,60,255,THRESH_BINARY);
+    threshold(gray,dst,65,255,THRESH_BINARY);
     blur(dst, dst, cv::Size(5,5));
     
     // dilate to fill any "holes"

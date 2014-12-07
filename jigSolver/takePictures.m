@@ -57,8 +57,10 @@
     // DEBUG for setting the images for each thing based on built in, faster debug
     self.solutionImg.image = [UIImage imageNamed:@"IMG_2774.png"];
     [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2774.png"];
-    self.piecesImg.image = [UIImage imageNamed:@"IMG_2785.png"];
-    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2785.png"];
+    
+    self.piecesImg.image = [UIImage imageNamed:@"IMG_2775.JPG"];
+    //self.piecesImg.image = [UIImage imageNamed:@"IMG_2785.png"];
+    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2775.JPG"];
     
 }
 
