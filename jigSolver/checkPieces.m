@@ -27,7 +27,7 @@
     
     // Create the data model
     _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png", @"page4.png"];
+    _pageImages = @[@"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG"];
     
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
@@ -64,6 +64,7 @@
     //pageContentViewController.pieceImg = [UIImage imageNamed:@"IMG_2775"];
     //pageContentViewController.pieceImgView.image = [UIImage imageNamed:@"IMG_2775"];
     pageContentViewController.pieceImgView.image = [JSVsingleton sharedObj].piecesImg; // change to indivual piece..
+    pageContentViewController.pieceImgView.image = [UIImage imageNamed:@"IMG_2775.JPG"];
     pageContentViewController.pageIndex = index;
     
     return pageContentViewController;

@@ -7,6 +7,7 @@
 //
 
 #import "PageContentViewController.h"
+#import "JSVsingleton.h"
 
 @interface PageContentViewController ()
 
@@ -28,8 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.pieceImg.image = [UIImage imageNamed:self.imageFile];
     
+    NSLog(@"FROM PAGE VIEW: %i", self.pageIndex);
+    self.pieceImgView.image = [[JSVsingleton sharedObj] getPieceMask:self.pageIndex];
+    //[UIImage imageNamed:@"IMG_2775.JPG"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -23,7 +23,7 @@
 		146A46831A3153C3003B1A85 /* homeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46821A3153C3003B1A85 /* homeScreen.m */; };
 		146A46861A3382CF003B1A85 /* takePictures.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46851A3382CF003B1A85 /* takePictures.m */; };
 		146A46891A338E61003B1A85 /* selectPieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46881A338E61003B1A85 /* selectPieces.m */; };
-		146A468C1A339251003B1A85 /* JSVsingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A468B1A339251003B1A85 /* JSVsingleton.m */; };
+		146A468C1A339251003B1A85 /* JSVsingleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146A468B1A339251003B1A85 /* JSVsingleton.mm */; };
 		146A468F1A33B4CA003B1A85 /* finalResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A468E1A33B4CA003B1A85 /* finalResult.m */; };
 		146A46921A33BC96003B1A85 /* checkPieces.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A46911A33BC96003B1A85 /* checkPieces.m */; };
 		14A6875A1A168E15009A188C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A687591A168E15009A188C /* main.m */; };
@@ -76,7 +76,7 @@
 		146A46871A338E61003B1A85 /* selectPieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = selectPieces.h; sourceTree = "<group>"; };
 		146A46881A338E61003B1A85 /* selectPieces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = selectPieces.m; sourceTree = "<group>"; };
 		146A468A1A339251003B1A85 /* JSVsingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSVsingleton.h; sourceTree = "<group>"; };
-		146A468B1A339251003B1A85 /* JSVsingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSVsingleton.m; sourceTree = "<group>"; };
+		146A468B1A339251003B1A85 /* JSVsingleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JSVsingleton.mm; sourceTree = "<group>"; };
 		146A468D1A33B4CA003B1A85 /* finalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = finalResult.h; sourceTree = "<group>"; };
 		146A468E1A33B4CA003B1A85 /* finalResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = finalResult.m; sourceTree = "<group>"; };
 		146A46901A33BC96003B1A85 /* checkPieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkPieces.h; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 				FD71486E1A2BBA69004801F8 /* Puzzle */,
 				143F4B311A1B350B00E83FC6 /* testSources */,
 				146A468A1A339251003B1A85 /* JSVsingleton.h */,
-				146A468B1A339251003B1A85 /* JSVsingleton.m */,
+				146A468B1A339251003B1A85 /* JSVsingleton.mm */,
 				14A687611A168E15009A188C /* Main.storyboard */,
 				14A687641A168E15009A188C /* Images.xcassets */,
 				14A687661A168E15009A188C /* LaunchScreen.xib */,
@@ -438,7 +438,7 @@
 				14C5365D1A341A3700B6BF2B /* PageContentViewController.m in Sources */,
 				144FFAAC1A2B5F6200267086 /* JSVpuzzleSolveController.m in Sources */,
 				14A6875D1A168E15009A188C /* AppDelegate.m in Sources */,
-				146A468C1A339251003B1A85 /* JSVsingleton.m in Sources */,
+				146A468C1A339251003B1A85 /* JSVsingleton.mm in Sources */,
 				14A6875A1A168E15009A188C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

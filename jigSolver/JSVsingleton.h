@@ -20,4 +20,6 @@
 
 + (JSVsingleton *) sharedObj;
 
+- (UIImage *) getPieceMask: (int) index;
+
 @end

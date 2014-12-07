@@ -7,6 +7,10 @@
 //
 
 #import "JSVsingleton.h"
+#import "JSVpuzzlePiece.h"
+#import "opencv2/highgui/ios.h"
+#import <opencv2/opencv.hpp>
+using namespace cv;
 
 @implementation JSVsingleton
 
@@ -35,5 +39,12 @@
     
     return shared;
 }
+
+- (UIImage *) getPieceMask: (int) index{
+    JSVpuzzlePiece *piece = self.pieces[index];
+    return MatToUIImage(piece.originalImage.clone());;
+}
+// creates methods: getPieceMask: withIndex
+// getPieceOriginal: withIndex
 
 @end
