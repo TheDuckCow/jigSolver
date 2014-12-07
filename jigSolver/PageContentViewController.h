@@ -11,6 +11,9 @@
 @interface PageContentViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImage *pieceImg;
 @property (strong, nonatomic) IBOutlet UIImageView *pieceImgView;
+@property (strong, nonatomic) IBOutlet UIImageView *imgMask;
+@property (strong, nonatomic) IBOutlet UIImageView *source;
+@property (strong, nonatomic) IBOutlet UIImageView *overlayPiece;
 @property NSUInteger pageIndex;
 @property NSString *titleText;
 @property NSString *imageFile;

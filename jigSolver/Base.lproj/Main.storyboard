@@ -322,21 +322,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Each piece has some possible solutions, either tap the correct oen for each peice or select next for auto solve" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n0-GK-fhR">
-                                <rect key="frame" x="32" y="206" width="256" height="119"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoImg" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-4H-BOV">
-                                <rect key="frame" x="32" y="87" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ew6-5t-Y3A">
+                                <rect key="frame" x="0.0" y="213" width="320" height="216"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoImg" translatesAutoresizingMaskIntoConstraints="NO" id="XiT-cD-wZ4">
+                                <rect key="frame" x="168" y="72" width="152" height="133"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoImg" translatesAutoresizingMaskIntoConstraints="NO" id="ABi-4H-BOV">
+                                <rect key="frame" x="0.0" y="72" width="160" height="133"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EoM-iX-UQL">
+                                <rect key="frame" x="0.0" y="72" width="160" height="133"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="imgMask" destination="XiT-cD-wZ4" id="ReX-uI-SFc"/>
+                        <outlet property="overlayPiece" destination="EoM-iX-UQL" id="Tl3-WY-gLs"/>
                         <outlet property="pieceImgView" destination="ABi-4H-BOV" id="g2D-Z4-Jn0"/>
+                        <outlet property="source" destination="ew6-5t-Y3A" id="QWN-l7-d7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wT-Cd-gHB" userLabel="First Responder" sceneMemberID="firstResponder"/>

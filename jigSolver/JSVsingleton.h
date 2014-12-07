@@ -21,5 +21,7 @@
 + (JSVsingleton *) sharedObj;
 
 - (UIImage *) getPieceMask: (int) index;
+- (UIImage *) getPieceMaskInverse: (int) index;
+- (UIImage *) getPieceOriginal: (int) index;
 
 @end

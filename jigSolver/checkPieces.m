@@ -79,7 +79,7 @@
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
-    NSLog(@"SLide: %i",index);
+    //NSLog(@"SLide: %i",index);
     index--;
     return [self viewControllerAtIndex:index];
 }
@@ -91,7 +91,7 @@
     if (index == NSNotFound) {
         return nil;
     }
-    NSLog(@"Slide #: %i",index);
+    //NSLog(@"Slide #: %i",index);
     index++;
     if (index == [[JSVsingleton sharedObj].pieces count]) {
         return nil;

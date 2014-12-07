@@ -42,8 +42,22 @@ using namespace cv;
 
 - (UIImage *) getPieceMask: (int) index{
     JSVpuzzlePiece *piece = self.pieces[index];
+    return MatToUIImage(piece.mask.clone());;
+}
+
+- (UIImage *) getPieceMaskInverse: (int) index{
+    JSVpuzzlePiece *piece = self.pieces[index];
+    Mat tmp = piece.mask.clone();
+    bitwise_not(tmp,tmp);
+    return MatToUIImage(tmp);
+}
+
+- (UIImage *) getPieceOriginal: (int) index{
+    JSVpuzzlePiece *piece = self.pieces[index];
     return MatToUIImage(piece.originalImage.clone());;
 }
+
+
 // creates methods: getPieceMask: withIndex
 // getPieceOriginal: withIndex
 

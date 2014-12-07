@@ -7,7 +7,10 @@
 //
 
 #import "PageContentViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "JSVsingleton.h"
+#import <UIKit/UIKit.h>
+#import <CoreImage/CoreImage.h>
 
 @interface PageContentViewController ()
 
@@ -30,10 +33,51 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"FROM PAGE VIEW: %i", self.pageIndex);
-    self.pieceImgView.image = [[JSVsingleton sharedObj] getPieceMask:self.pageIndex];
-    //[UIImage imageNamed:@"IMG_2775.JPG"];
+    //NSLog(@"FROM PAGE VIEW: %i", self.pageIndex);
+    self.imgMask.image = [[JSVsingleton sharedObj] getPieceMaskInverse:self.pageIndex];
+    self.pieceImgView.image = [[JSVsingleton sharedObj] getPieceOriginal:self.pageIndex];
+    self.source.image = [JSVsingleton sharedObj].solutionImg;
+    
+    
 }
+
+-(void) viewDidAppear:(BOOL)animated{
+    UIImage *maskImg = [self maskImage: self.pieceImgView.image withMask:self.imgMask.image];
+    self.overlayPiece.image = maskImg;
+    
+    
+    
+    CGRect newFrame = self.overlayPiece.frame;
+    newFrame.origin.x -= 100;    // shift right by 500pts
+    newFrame.origin.y -= 100;
+    [UIView animateWithDuration:1.0
+                          delay: 0.5
+                        options: UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
+                     animations:^{
+                         self.overlayPiece.frame = newFrame;   // move
+                     }
+                     completion:nil];  // no completion handler
+    
+}
+
+- (UIImage *)maskImage:(UIImage *)image withMask:(UIImage *)maskImage {
+    
+    CGImageRef maskRef = maskImage.CGImage;
+    
+    CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
+                                        CGImageGetHeight(maskRef),
+                                        CGImageGetBitsPerComponent(maskRef),
+                                        CGImageGetBitsPerPixel(maskRef),
+                                        CGImageGetBytesPerRow(maskRef),
+                                        CGImageGetDataProvider(maskRef), NULL, false);
+    
+    CGImageRef masked = CGImageCreateWithMask([image CGImage], mask);
+    return [UIImage imageWithCGImage:masked];
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
