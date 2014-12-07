@@ -27,6 +27,13 @@
     self.ready = NO;
     
     
+    self.title = [NSString stringWithFormat: @"Selected Pieces (%i)",[[JSVsingleton sharedObj].pieces count]];
+    
+    // setup gesture (tap) recognizer
+    UITapGestureRecognizer *rec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognized:)];
+    [self.view addGestureRecognizer:rec];
+    
+    
     //[JSVopenCV solvePuzzle:self.imgViewORIG.image withOriginal: self.imgViewSOL.image];
     // pass in the NSMutableArray for pieces and do segmentation and run that part.
     // could do based on a floodfill algorithm on binary image instead of segmenting everything!
@@ -39,10 +46,12 @@
     
     // get B&W of all pieces found, then allow for taps to (de)select pieces
     UIImage *piecesOrig = [JSVsingleton sharedObj].piecesImg;
-    self.imgView.image = [JSVopenCV segmentFromBackground:piecesOrig];
+    self.imgView.image = [JSVopenCV createPiecesFromImage:piecesOrig];
     self.imgView.alpha = 1;
     self.ready = YES;
-
+    
+    // update the title for number of selected pieces
+    self.title = [NSString stringWithFormat: @"Selected Pieces (%i)",[[JSVsingleton sharedObj].pieces count]];
     
 }
 
@@ -60,6 +69,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)tapRecognized:(UITapGestureRecognizer *)recognizer
+{
+    if(recognizer.state == UIGestureRecognizerStateRecognized)
+    {
+        CGPoint point = [recognizer locationInView:recognizer.view];
+        // again, point.x and point.y have the coordinates
+        NSLog(@"##\nPos %f %f",point.x,point.y);
+        // CONVERT POINT:
+        point = [self.view convertPoint:point toView:self.imgView];
+        NSLog(@"--\nPos %f %f",point.x,point.y);
+        
+        // run function with that xy input to check which point it overlaps
+    }
+}
+
 
 - (IBAction)navNext:(id)sender {
     
