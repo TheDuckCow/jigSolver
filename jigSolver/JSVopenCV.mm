@@ -102,14 +102,12 @@ using namespace std;
 
 + (NSArray *) segmentPiecesFromBackground: (UIImage *) input {
     
-    
-    NSMutableArray *puzzlePieces = [[NSMutableArray alloc]init];
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
     //[self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
     [self createPiecesFromImage:input];
-    return [NSArray arrayWithArray:puzzlePieces];
+    return [JSVsingleton sharedObj].pieces;
 
 }
 
