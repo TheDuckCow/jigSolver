@@ -25,6 +25,8 @@ using namespace cv;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
     
     // the heavy processing all hapens here.
@@ -35,14 +37,49 @@ using namespace cv;
     
 //    self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
-    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledPieces[0]]];
+    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledRectanlges[2]]];
     
 //    [JSVOpenCVSIFT matchPieceWithSolution:segmentedPieces[0] withSolution:[UIImage imageNamed: solutions[0]]];
     
-    JSVpuzzlePiece *piece = segmentedPieces[1];
-    UIImage * match = [JSVOpenCVSIFT matchPieceWithSolution:piece withSolution:[UIImage imageNamed:solutions[0]]];
-    //
-    self.swer.image = match;
+    Mat result;
+    
+    [JSVOpenCVSIFT matchPieces:segmentedPieces withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
+//    UIImage * match = [JSVOpenCVSIFT matchPieceWithSolution:piece withSolution:[UIImage imageNamed:solutions[0]]];
+    
+    
+    Mat finalResult;
+    for(int i = 0 ; i < result.rows; i ++ ) {
+        Mat rowResult;
+        for(int j =0; j < result.cols; j++ ){
+
+            int index = result.at<char>(j, i);
+            if (index == -1) continue;
+            
+            JSVpuzzlePiece * image = segmentedPieces[index];
+            Mat temp = image.originalImage.clone();
+            if (rowResult.empty()) {
+                rowResult = temp.clone();
+                NSLog(@"Empty");
+        
+            } else {
+                Mat clone = rowResult.clone();
+                [JSVOpenCVSIFT combineImageLeftRight:clone right:temp result:rowResult];
+                NSLog(@"not empty");
+            }
+        }
+        if (finalResult.empty()) {
+            finalResult = rowResult;
+        } else {
+            Mat clone = finalResult.clone();
+            [JSVOpenCVSIFT combineImageTopBottm:clone bottom:rowResult result:finalResult];
+        }
+        printf("\n");
+    }
+    
+    UIImage * yo = MatToUIImage(finalResult);
+    
+    self.swer.image = yo;
+//    self.swer.image = match;
     
     //self.swer.image =[UIImage imageNamed:scrambled[0]];
     
@@ -52,8 +89,10 @@ using namespace cv;
     
     
 }
+
+
+
 - (IBAction)pressBack:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

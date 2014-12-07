@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <opencv2/opencv.hpp>
 
 @class JSVpuzzlePiece;
 @interface JSVOpenCVSIFT : NSObject
-//Subject to change
-+(UIImage *) matchPieceWithSolution:(JSVpuzzlePiece *) piece withSolution: (UIImage *) solution;
-+(JSVpuzzlePiece *) largestPuzzlePieceInPieces:(NSArray *) pieces;
+
++(void) matchPieces:(NSArray *) pieces withSolution: (UIImage *) solution col: (int) col row:(int) row result:(cv::Mat &) finalResult;
+
++(void) combineImageLeftRight:(cv::Mat &) left right: (cv::Mat &) right result:(cv::Mat &) result;
++(void) combineImageTopBottm: (cv::Mat &) top bottom: (cv::Mat &) bottom result:(cv::Mat &) result;
 
 @end
