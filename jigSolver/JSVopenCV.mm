@@ -7,6 +7,7 @@
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
 #import "JSVpuzzlePiece.h"
+#import "JSVsingleton.h"
 using namespace cv;
 using namespace std;
 
@@ -29,6 +30,7 @@ using namespace std;
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
+    UIImageToMat(input,sansBackground);
     NSMutableArray *puzzlePieces = [[NSMutableArray alloc]init];
     
     
@@ -38,7 +40,11 @@ using namespace std;
     
     
     // should segment and create individual puzzlePiece objects for each puzle piece
+    
     [self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
+    JSVpuzzlePiece *piece = puzzlePieces[0];
+    sansBackground = piece.originalImage.clone();
+    
     
     // now for each of these found puzzle pieces, create the edge objects/information
     // and figure out their geometry
@@ -49,13 +55,12 @@ using namespace std;
         // draw the contour from here...
         
     }
+     
     
     // now do whatever it is to "solve" the puzzle, ie template matching using the innerRectable Mat
     // of each puzzle piece, and verifying the geometry matches etc.
     
     // return the result
-    JSVpuzzlePiece *piece = puzzlePieces[2];
-    sansBackground = piece.mask.clone();
     return MatToUIImage(sansBackground);
 }
 
@@ -83,6 +88,18 @@ using namespace std;
     return output;
 }
 
+// not currently used...
++(NSMutableArray *) arrayOfPieces: (NSMutableArray *) pieces{
+    
+    NSMutableArray *output = [[NSMutableArray alloc]init];
+    for (int i=0; i< [pieces count]; i++){
+        JSVpuzzlePiece *piece = pieces[i];
+        [output addObject:MatToUIImage(piece.originalImage)];
+    }
+    
+    return output;
+}
+
 + (NSArray *) segmentPiecesFromBackground: (UIImage *) input {
     
     
@@ -100,7 +117,125 @@ using namespace std;
 // PRIVATE METHODS
 // #####################################################################################
 
+// call for in selectPieces, raw segmenting the background
++ (UIImage *) createPiecesFromImage: (UIImage *) src{
+    
+    Mat srcMat;
+    Mat dst;
+    UIImageToMat(src,srcMat);
+    
+    //pre-segmentation
+    Mat gray;
+    cvtColor(srcMat,gray,CV_RGB2GRAY);
+    blur(gray, gray, cv::Size(5,5));
+    
+    // dynamic threshold of some kind?
+    threshold(gray,dst,60,255,THRESH_BINARY);
+    blur(dst, dst, cv::Size(5,5));
+    
+    // dilate to fill any "holes"
+    int erosion_size = 2;
+    Mat element = getStructuringElement( MORPH_RECT,
+                                        cv::Size( 2*erosion_size + 1, 2*erosion_size+1 ),
+                                        cv::Point( erosion_size, erosion_size ) );
+    dilate(dst, dst, element, cv::Point(-1, -1), 1);
+    
+    // Contours part
+    vector<vector<cv::Point>> contours;
+    vector<Vec4i> hierarchy;
+    findContours(dst,contours, hierarchy, RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+    
+    // before finding pieces, remove all from the singleton
+    [[JSVsingleton sharedObj].pieces removeAllObjects];
+    
+    // now find the largest contour.. assumed to be the background
+    Mat contourOut = Mat::zeros(dst.size(),CV_8UC1);
+    for (int i=0; i< contours.size(); i++){
+        int area = contourArea(contours[i]);
+        // this seems SUPER arbitrary.
+        if (area >500000){
+            drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
+            
+            // CREATE the puzzle piece. long winded process.
+            JSVpuzzlePiece *piece = [[JSVpuzzlePiece alloc] init];
+            
+            // now HERE crop the piece down to the bounding box of just the contour filled area,
+            // find the smallest and largest x and y values in the contour list of points
+            int x_lo = contours[i][0].x;
+            int x_hi = contours[i][0].x;
+            int y_lo = contours[i][0].y;
+            int y_hi = contours[i][0].y;
+            
+            for (int j=0; j< contours[i].size(); j++){
+                //NSLog(@"x:%i %i,y: %i %i",x_lo,x_hi,y_lo,y_hi);
+                int tmp = contours[i][j].x;
+                if (tmp < x_lo){
+                    x_lo = tmp;
+                }
+                else if (tmp > x_hi){
+                    x_hi = tmp;
+                }
+                tmp = contours[i][j].y;
+                if (tmp < y_lo){
+                    y_lo = tmp;
+                }
+                else if (tmp > y_hi){
+                    y_hi = tmp;
+                }
+                
+            }
+            
+            // now create the mask and cropped image based on these new points
+            piece.mask = Mat::zeros(cv::Size(x_hi-x_lo,y_hi-y_lo),CV_8UC1); // check if off by one??
+            
+            
+            // adjust the mask/image size so it has the correct bounds
+            for (int j=0; j<piece.contour.size(); j++){
+                piece.contour[j].x -= x_lo;
+                piece.contour[j].y -= y_lo;
+            }
+            
+            
+            // set the image
+            cv::Rect myROI(x_lo, y_lo, x_hi-x_lo, y_hi-y_lo);
+            piece.originalImage = srcMat(myROI);
+            
+            Mat tmp = contourOut.clone();
+            piece.mask = tmp(myROI);
+            //piece.mask = Mat::zeros(piece.originalImage.size(), CV_8UC1);
+            
+            // now REDO the contours
+            vector<vector<cv::Point>> contoursB;
+            vector<Vec4i> hierarchyB;
+            
+            findContours(piece.mask,contoursB, hierarchyB, RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+            
+            piece.mask = Mat::zeros(piece.mask.size(), CV_8UC1);
+            
+            drawContours(piece.mask, contoursB, 0, 255, CV_FILLED, 8, hierarchyB);
+            
+            // FINAL contours and add piece to array
+            piece.contour = contoursB[0];
+            
+            [[JSVsingleton sharedObj].pieces addObject:piece];
+            
+            
+        }
+    }
+    
+    // ultiamtely, should save puzzle peice objects to singleton and have intermediate
+    // image shown here
+    return MatToUIImage(contourOut);
+}
 
+
+
+// #####################################################################################
+// OLD METHODS
+// #####################################################################################
+
+
+// the OLD method for semgenting pieces, returns/creates list of puzzle piece objects
 + (void) segmentPiecesFromBackground: (Mat &) src withPieces: (NSMutableArray *) puzzleArray withDst: (Mat &) dst{
     
     // at first assume the background is one consistent color
@@ -215,8 +350,6 @@ using namespace std;
         
         findContours(piece.mask,contoursB, hierarchyB, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
         piece.mask = Mat::zeros(piece.mask.size(), CV_8UC1);
-        // COMMENT OUT THIS LINE, don't actually want this "edge" instead of mask
-        //NSLog(@"dont' forget to comment out the next line, ~ 220 of JSVopenCV.mm");
         drawContours(piece.mask, contoursB, 0, 255, CV_FILLED, 8, hierarchyB);
         
         // FINAL contours.
@@ -235,14 +368,6 @@ using namespace std;
     //dst = contourOut.clone(); // would replace output dst image with new threshold
     
 }
-
-
-///
-
-// #####################################################################################
-// SIFT
-// #####################################################################################
-
 
 
 
