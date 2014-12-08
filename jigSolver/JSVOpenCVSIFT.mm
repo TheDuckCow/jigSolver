@@ -86,17 +86,17 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     double piece_height = (double) solution_rows / row;
     double std_treshold = sqrt(piece_width * piece_width + piece_height * piece_height) / 2;//Above which there is no rotation
     
-    NSLog(@"threshold: %f", std_treshold);
+//    NSLog(@"threshold: %f", std_treshold);
     finalResult = Mat(row, col, CV_8SC1, -1);
     
     
-    NSLog(@"From least distance to highest distance:");
+//    NSLog(@"From least distance to highest distance:");
     for (int i = 0; i < results.size(); i ++ ){
         ResultMatch item = results[i];
         double x = item.centroid.x / piece_width;
         double y = item.centroid.y / piece_height;
         
-        NSLog(@"%f", item.std_unnormalized);
+//        NSLog(@"%f", item.std_unnormalized);
         if (item.std_unnormalized > std_treshold){
             JSVpuzzlePiece * piece = pieces[item.index];
             piece.guess_rotation = 0;
@@ -140,7 +140,7 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     }
     
     for (JSVpuzzlePiece * p  in pieces) {
-        printf("%d, %d %f\n", p.guess_x, p.guess_y, p.guess_rotation);
+//        printf("%d, %d %f\n", p.guess_x, p.guess_y, p.guess_rotation);
     }
 
     //Finding good matches
@@ -563,12 +563,12 @@ void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
             Mat temp = image.originalImage.clone();
             if (rowResult.empty()) {
                 rowResult = temp.clone();
-                NSLog(@"Empty");
+//                NSLog(@"Empty");
         
             } else {
                 Mat clone = rowResult.clone();
                 [JSVOpenCVSIFT combineImageLeftRight:clone right:temp result:rowResult];
-                NSLog(@"not empty");
+//                NSLog(@"not empty");
             }
         }
         if (finalResult.empty()) {
@@ -577,7 +577,7 @@ void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
             Mat clone = finalResult.clone();
             [JSVOpenCVSIFT combineImageTopBottm:clone bottom:rowResult result:finalResult];
         }
-        printf("\n");
+//        printf("\n");
     }
     
 }
