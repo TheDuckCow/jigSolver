@@ -129,7 +129,7 @@ using namespace cv;
     [self startAnimatingMaskWithIndex:index];
     self.scrollStarted = NO;
     JSVpuzzlePiece * currentPiece = [JSVsingleton sharedObj].pieces[index];
-    self.rotationLabel.text = [NSString stringWithFormat:@"%f", currentPiece.guess_rotation / M_PI * 180];
+    self.rotationLabel.text = [NSString stringWithFormat:@"Estimate of piece roation: %f°", currentPiece.guess_rotation / M_PI * 180];
 }
 
 
