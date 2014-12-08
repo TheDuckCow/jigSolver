@@ -26,6 +26,7 @@
 		146A468C1A339251003B1A85 /* JSVsingleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146A468B1A339251003B1A85 /* JSVsingleton.mm */; };
 		146A468F1A33B4CA003B1A85 /* finalResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146A468E1A33B4CA003B1A85 /* finalResult.mm */; };
 		146A46921A33BC96003B1A85 /* checkPieces.mm in Sources */ = {isa = PBXBuildFile; fileRef = 146A46911A33BC96003B1A85 /* checkPieces.mm */; };
+		1495BA931A366A9100204CA6 /* set4_mess3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1495BA921A366A9100204CA6 /* set4_mess3.JPG */; };
 		14A6875A1A168E15009A188C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A687591A168E15009A188C /* main.m */; };
 		14A6875D1A168E15009A188C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6875C1A168E15009A188C /* AppDelegate.m */; };
 		14A687601A168E15009A188C /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14A6875F1A168E15009A188C /* ViewController.mm */; };
@@ -93,6 +94,7 @@
 		146A468E1A33B4CA003B1A85 /* finalResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = finalResult.mm; sourceTree = "<group>"; };
 		146A46901A33BC96003B1A85 /* checkPieces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkPieces.h; sourceTree = "<group>"; };
 		146A46911A33BC96003B1A85 /* checkPieces.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = checkPieces.mm; sourceTree = "<group>"; };
+		1495BA921A366A9100204CA6 /* set4_mess3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = set4_mess3.JPG; sourceTree = "<group>"; };
 		14A687541A168E15009A188C /* jigSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jigSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A687581A168E15009A188C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A687591A168E15009A188C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				14E4039F1A36601000AC7E85 /* set4_mess1.JPG */,
 				14E403A01A36601000AC7E85 /* set4_mess2.JPG */,
 				14E403A11A36601000AC7E85 /* set4_sol.JPG */,
+				1495BA921A366A9100204CA6 /* set4_mess3.JPG */,
 				14E403971A365BD200AC7E85 /* set3_mess1.png */,
 				14E403981A365BD200AC7E85 /* set3_mess2.png */,
 				14E403991A365BD200AC7E85 /* set3_mess3.png */,
@@ -421,6 +424,7 @@
 				143F4B451A1B350B00E83FC6 /* IMG_2778.JPG in Resources */,
 				14E403941A365ACC00AC7E85 /* set2_mess2.png in Resources */,
 				143F4B461A1B350B00E83FC6 /* IMG_2779.JPG in Resources */,
+				1495BA931A366A9100204CA6 /* set4_mess3.JPG in Resources */,
 				143F4B4A1A1B350B00E83FC6 /* IMG_2784.JPG in Resources */,
 				14E403A21A36601000AC7E85 /* set4_mess1.JPG in Resources */,
 				14E403961A365ACC00AC7E85 /* set2_solution.png in Resources */,

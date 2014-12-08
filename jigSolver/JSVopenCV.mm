@@ -141,11 +141,14 @@ using namespace std;
     Mat tmp;
     // attempting dynamic thresholding.. it's worse actually!
     
-    // 65 is the magic number
+    // NEW WAY OF THRESHOLD
+    //adaptiveThreshold( gray, dst, 255,ADAPTIVE_THRESH_GAUSSIAN_C,CV_THRESH_BINARY,17, -2 );
+    
+    
+    // OLD WAY OF THRESHOLD
     threshold(gray,dst,65,255,THRESH_BINARY);
-    //threshold(gray,dst,40,255,THRESH_BINARY);
     //threshold(gray,dst,0,255,CV_THRESH_BINARY | CV_THRESH_OTSU);
-    //blur(tmp, dst, cv::Size(5,5));
+    blur(dst, dst, cv::Size(5,5));
     
     // dilate to fill any "holes"
     int erosion_size = 2;

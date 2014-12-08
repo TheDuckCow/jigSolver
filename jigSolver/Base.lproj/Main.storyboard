@@ -31,7 +31,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znA-br-kAq" id="gxy-00-Tnk">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="21" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="jigSawlerLogo-02" translatesAutoresizingMaskIntoConstraints="NO" id="xGd-6n-YwD">
+                                                <imageView userInteractionEnabled="NO" tag="21" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jigSawlerLogo-02" translatesAutoresizingMaskIntoConstraints="NO" id="xGd-6n-YwD">
                                                     <rect key="frame" x="0.0" y="0.0" width="370" height="95"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="370" id="E1N-dT-stA"/>
@@ -56,7 +56,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tNW-6K-2XQ" id="6VQ-mp-B4E">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="42" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Solve Puzzle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEL-Cn-YFo">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="42" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solve Puzzle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEL-Cn-YFo">
                                                     <rect key="frame" x="8" y="25" width="329" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="329" id="waI-cl-4en"/>
@@ -341,7 +341,7 @@
                                 <rect key="frame" x="16" y="352" width="568" height="192"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1EE-cO-dmO"/>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
                                 <rect key="frame" x="16" y="556" width="568" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Db6-3t-ETI"/>

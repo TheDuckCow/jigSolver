@@ -92,25 +92,25 @@ using namespace cv;
     // determine the rows and columns of the puzzle based on input pieces
     // defautl elsewhere is set to be 2x2 (when initialized)
     int number = (int)[self.pieces count];
-    if (number == 4){
-        self.cols = 2;
-        self.rows = 2;
-    }
-    else if(number == 9){
-        self.rows = 3;
-        self.cols = 3;
-    }
-    else if (number == 16){
-        self.rows = 4;
-        self.cols = 4;
+    if (number == 1){
+        self.rows = 1;
+        self.cols = 1;
     }
     else if (number == 2){
         self.rows = 1;
         self.cols = 2;
     }
-    else if (number == 1){
-        self.rows = 1;
-        self.cols = 1;
+    else if (number == 4){
+        self.cols = 2;
+        self.rows = 2;
+    }
+    else if(number <= 9){
+        self.rows = 3;
+        self.cols = 3;
+    }
+    else if (number <= 16){
+        self.rows = 4;
+        self.cols = 4;
     }
     else{
         // is this really the best assumption/default case?

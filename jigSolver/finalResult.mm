@@ -41,21 +41,31 @@ using namespace cv;
 -(void) viewDidAppear:(BOOL)animated{
     
     // first, remove all previously existing image views
+    for (int i=0; i< [self.imageViews count]; i++){
+        [self.imageViews[i] removeFromSuperview];
+    }
+    // array should be empty now... but do this just in case
+    [self.imageViews removeAllObjects];
     
     //do stuff here. for each piece
     for (int i=0; i< [[JSVsingleton sharedObj].pieces count]; i++){
-        //JSVpuzzlePiece *piece = [JSVsingleton sharedObj].pieces[i];
+        JSVpuzzlePiece *piece = [JSVsingleton sharedObj].pieces[i];
         
         UIImage *maskImg = [self maskImage: [[JSVsingleton sharedObj] getPieceOriginal:i] withMask:[[JSVsingleton sharedObj] getPieceMaskInverse:i]];
+        [self.imageViews addObject: maskImg];
         
         int x = [JSVsingleton sharedObj].cols;
         int y = [JSVsingleton sharedObj].rows;
         
         // start by assuming 2x2
-        double height = self.size.height*.75/y;
-        double width = self.size.width*.75/x;
-                                             
-        CGRect framed = CGRectMake(self.size.width*.25 - width/2, self.size.height*.25 - height/2, width, height);
+        double height = self.size.height*.75/y; // make the pieces by 75% of the screen width/height
+        double width = self.size.width*.75/x;   // in total accross, so each is a fraction of that.
+        
+        // now also add in the "offset x/y", but relative to scaling of original image...
+        // need original image scale to do that... put it onto singleton later.
+        int div = 5;
+        
+        CGRect framed = CGRectMake(self.size.width*.25 + piece.offset_x/div, self.size.height*.25 + piece.offset_y/div, width, height);
         NSLog(@" convert: %i %i",i%x,i/x);
         
         UIImageView *pieceBlock = [[UIImageView alloc] initWithFrame:framed];
