@@ -53,7 +53,7 @@
     
     // perhaps add some exception handling?? if invalid number of languages returned e.g...
     UIImageView *cellimg = (UIImageView *)[cell viewWithTag:21];
-    cellimg.image = [UIImage imageNamed:@"logoImg"];
+    cellimg.image = [UIImage imageNamed:@"jigSawlerLogo-02"];
     
     UILabel *lbl = (UILabel *)[cell viewWithTag:42];
     if (indexPath.row == 1){
@@ -67,7 +67,7 @@
     }
     
     // make background transparent
-    cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0];
+    cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2];
     
     return cell;
 }
@@ -78,7 +78,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if(indexPath.row == 0){
-        return 140;
+        return 180;
     }
     return 80;
     
