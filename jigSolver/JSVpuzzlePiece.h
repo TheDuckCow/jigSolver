@@ -8,15 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
-using namespace cv;
 
 @interface JSVpuzzlePiece : NSObject
 
-@property (nonatomic) Mat originalImage;
-@property (nonatomic) Mat mask;
-@property (nonatomic) vector<cv::Point> contour;
+@property (nonatomic) cv::Mat originalImage;
+@property (nonatomic) cv::Mat mask;
+@property (nonatomic) cv::vector<cv::Point> contour;
 @property (nonatomic) int guess_x;
 @property (nonatomic) int guess_y;
 @property (nonatomic) double guess_rotation;

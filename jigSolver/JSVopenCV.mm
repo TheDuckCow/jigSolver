@@ -8,6 +8,7 @@
 #import <opencv2/opencv.hpp>
 #import "JSVpuzzlePiece.h"
 #import "JSVsingleton.h"
+#import "JSVOpenCVSIFT.h"
 using namespace cv;
 using namespace std;
 
@@ -100,16 +101,22 @@ using namespace std;
     return output;
 }
 
-+ (NSArray *) segmentPiecesFromBackground: (UIImage *) input {
++ (NSArray *) segmentPiecesFromBackground: (UIImage *) input isSolution:(BOOL)isSolution{
     
     Mat inputM;
     Mat sansBackground;
     UIImageToMat(input,inputM);
     //[self segmentPiecesFromBackground:inputM withPieces:puzzlePieces withDst: sansBackground];
-    [self createPiecesFromImage:input];
-    NSArray *tmp = [[NSArray alloc] initWithArray:[JSVsingleton sharedObj].pieces];
+    [self createPiecesFromImage:input isSolution:isSolution];
     
-    return tmp;
+    if (isSolution) {
+        NSArray * temp = @[[JSVsingleton sharedObj].solution];
+        return temp;
+    }else {
+        NSArray *tmp = [[NSArray alloc] initWithArray:[JSVsingleton sharedObj].pieces];
+        return tmp;
+        
+    }
 
 }
 
@@ -119,7 +126,7 @@ using namespace std;
 // #####################################################################################
 
 // call for in selectPieces, raw segmenting the background
-+ (UIImage *) createPiecesFromImage: (UIImage *) src{
++ (UIImage *) createPiecesFromImage: (UIImage *) src isSolution:(BOOL) isSolution{
     
     Mat srcMat;
     Mat dst;
@@ -146,8 +153,13 @@ using namespace std;
     vector<Vec4i> hierarchy;
     findContours(dst,contours, hierarchy, RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
     
+    NSMutableArray * solutionContours;
     // before finding pieces, remove all from the singleton
-    [[JSVsingleton sharedObj].pieces removeAllObjects];
+    if (!isSolution) {
+        [[JSVsingleton sharedObj].pieces removeAllObjects];
+    } else {
+        solutionContours = [NSMutableArray new];
+    }
     
     // now find the largest contour.. assumed to be the background
     Mat contourOut = Mat::zeros(dst.size(),CV_8UC1);
@@ -222,12 +234,19 @@ using namespace std;
             piece.guess_x = -1;
             piece.guess_y = -1;
             
-            [[JSVsingleton sharedObj].pieces addObject:piece];
-            
+            if (isSolution) {
+                [solutionContours addObject:piece];
+            } else {
+                [[JSVsingleton sharedObj].pieces addObject:piece];
+            }
             
         }
     }
     
+    if (isSolution){
+        
+        [JSVsingleton sharedObj].solution = [JSVOpenCVSIFT largestPuzzlePieceInPieces:solutionContours];
+    }
     // ultiamtely, should save puzzle peice objects to singleton and have intermediate
     // image shown here
     return MatToUIImage(contourOut);

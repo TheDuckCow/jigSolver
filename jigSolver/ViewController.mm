@@ -38,21 +38,20 @@ using namespace cv;
     
     //self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
-    NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledRectanlges[0]]];
+//    [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledRectanlges[0]] isSolution:NO];
     
     
-    // conversion to new format
-    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2785.png"];
-    [JSVopenCV createPiecesFromImage: [JSVsingleton sharedObj].piecesImg ];
-    NSMutableArray *segNew = [[NSMutableArray alloc] initWithArray: [JSVsingleton sharedObj].pieces];
+    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2773.JPG"];
+    
+    [JSVopenCV createPiecesFromImage: [JSVsingleton sharedObj].piecesImg isSolution:NO];
     //segNew = [JSVsingleton sharedObj].pieces;
     
     // either segNew or segmentedPieces
     Mat result;
-    [JSVOpenCVSIFT matchPieces:segNew withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
+    [JSVOpenCVSIFT matchPieces:[JSVsingleton sharedObj].pieces withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
     
     Mat finalResult;
-    [JSVOpenCVSIFT combineResul:segNew withFinalMatches:result result:finalResult];
+    [JSVOpenCVSIFT combineResul:[JSVsingleton sharedObj].pieces withFinalMatches:result result:finalResult];
     
     UIImage * yo = MatToUIImage(finalResult);
     

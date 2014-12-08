@@ -71,7 +71,10 @@ using namespace cv;
     Mat result;
     NSMutableArray *piecesArray = [[NSMutableArray alloc] initWithArray: self.pieces];
     
+    NSLog(@"%@", self.pieces);
+    
     [JSVOpenCVSIFT matchPieces:piecesArray withSolution:self.solutionImg col:2 row:2 result:result];
+    NSLog(@"%@", self.pieces);
     
     self.pieces = piecesArray;
     
@@ -81,11 +84,6 @@ using namespace cv;
     
     [JSVOpenCVSIFT combineResul:piecesArray withFinalMatches:result result:finalResult];
     self.combinedImg = MatToUIImage(finalResult);
-    
-    
-    self.pieces = piecesArray;
-    
-    
     
 }
 

@@ -10,6 +10,8 @@
 #import "JSVopenCV.h"
 #import "JSVpuzzlePiece.h"
 
+#import "JSVsingleton.h"
+
 #import <opencv2/opencv.hpp>
 #import <opencv2/nonfree/features2d.hpp>
 #import <algorithm>
@@ -35,9 +37,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
 
 +(void) matchPieces:(NSArray *) pieces withSolution: (UIImage *) solution col: (int) col row:(int) row result:(Mat &) finalResult{
     
-    NSArray * solutionArray = [JSVopenCV segmentPiecesFromBackground:solution];
+    [JSVopenCV segmentPiecesFromBackground:solution isSolution:YES];
     
-    JSVpuzzlePiece * solutionPiece = [self largestPuzzlePieceInPieces:solutionArray];
+    JSVpuzzlePiece * solutionPiece = [JSVsingleton sharedObj].solution;
     
     int solution_cols = solutionPiece.mask.cols;
     int solution_rows = solutionPiece.mask.rows;

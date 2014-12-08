@@ -13,7 +13,7 @@
 
 + (UIImage *)testFunction:(UIImage *)input;
 + (UIImage *)solvePuzzle:(UIImage *)input withOriginal: (UIImage *) original;
-+ (NSArray *)segmentPiecesFromBackground :(UIImage *) input;
-+ (UIImage *)createPiecesFromImage: (UIImage *) src;
++ (NSArray *)segmentPiecesFromBackground :(UIImage *) input isSolution:(BOOL) isSolution;
++ (UIImage *)createPiecesFromImage: (UIImage *) src isSolution:(BOOL) isSolution;
 
 @end

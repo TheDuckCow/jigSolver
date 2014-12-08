@@ -20,4 +20,5 @@
 
 +(void) combineResul:(NSArray *) segmentedPieces withFinalMatches:(cv::Mat &) solutionMatch result:(cv::Mat &) finalResult;
 
++(JSVpuzzlePiece *) largestPuzzlePieceInPieces:(NSArray *) piece;
 @end

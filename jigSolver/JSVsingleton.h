@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
+@class JSVpuzzlePiece;
+
 @interface JSVsingleton : NSObject
+
 
 @property (nonatomic, strong) NSString *testString;
 @property (nonatomic, strong) UIImage *solutionImg;
 @property (nonatomic, strong) UIImage *piecesImg;
 @property (nonatomic, strong) UIImage *combinedImg;
 @property (nonatomic, strong) NSMutableArray *pieces;
+@property (nonatomic, strong) JSVpuzzlePiece * solution;
 @property (nonatomic, strong) NSMutableArray *resultPositions;
 
 

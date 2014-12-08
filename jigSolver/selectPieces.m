@@ -46,7 +46,7 @@
     
     // get B&W of all pieces found, then allow for taps to (de)select pieces
     UIImage *piecesOrig = [JSVsingleton sharedObj].piecesImg;
-    self.imgView.image = [JSVopenCV createPiecesFromImage:piecesOrig];
+    self.imgView.image = [JSVopenCV createPiecesFromImage:piecesOrig isSolution:NO];
     self.imgView.alpha = 1;
     self.ready = YES;
     
