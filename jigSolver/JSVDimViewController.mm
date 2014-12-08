@@ -89,7 +89,7 @@ using namespace cv;
         [self.scrollView addSubview:imageView];
         width += delta;
         Mat originalImage = [JSVsingleton  sharedObj].solution.originalImage.clone();
-        Mat zero = Mat::zeros(originalImage.rows, originalImage.cols, CV_8UC4);
+        Mat zero = Mat::zeros(originalImage.rows, originalImage.cols, CV_8UC1);
         int x = piece.guess_x;
         int y = piece.guess_y;
         NSLog(@"%d %d", x, y);

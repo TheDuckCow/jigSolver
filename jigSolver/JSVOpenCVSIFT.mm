@@ -434,7 +434,13 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 
 +(double) computeAverageAngleDiff: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
     vector<double> averages;
-    return [self computeAverageRelativeAngleDiff:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution averages:averages];
+    [self computeAverageRelativeAngleDiff:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution averages:averages];
+    
+    int index = (int) averages.size() / 2;
+    nth_element(averages.begin(), averages.begin() + index, averages.end());
+    
+    
+    return averages[index];
 }
 
 
