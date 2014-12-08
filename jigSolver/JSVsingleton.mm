@@ -19,6 +19,7 @@ using namespace cv;
 @synthesize testString;
 @synthesize solutionImg;
 @synthesize piecesImg;
+@synthesize combinedImg;
 @synthesize pieces;
 @synthesize resultPositions;
 
@@ -36,7 +37,8 @@ using namespace cv;
         shared.solutionImg = [[UIImage alloc] init];
         shared.piecesImg = [[UIImage alloc] init];
         shared.pieces = [[NSMutableArray alloc] init];
-        shared.resultPositions [[NSMutableArray alloc] init];
+        shared.resultPositions = [[NSMutableArray alloc] init];
+        shared.combinedImg = [[UIImage alloc] init];
     
     });
     
@@ -66,18 +68,13 @@ using namespace cv;
     [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:2 row:2 result:result];
     
     // now convert result into the result
+    Mat finalResult;
+    [JSVOpenCVSIFT combineResul:self.pieces withFinalMatches:result result:finalResult];
+    self.combinedImg = MatToUIImage(finalResult);
     
     
 }
 
-- (UIImage *)returnCombinedSOlution{
-    
-    // WORKING ON IT.
-    Mat finalResult;
-    [JSVOpenCVSIFT combineResul:self.pieces withFinalMatches:result result:finalResult];
-    return MatToUIImage(finalResult);
-    
-}
 
 
 // creates methods: getPieceMask: withIndex

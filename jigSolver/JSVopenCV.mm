@@ -218,6 +218,10 @@ using namespace std;
             // FINAL contours and add piece to array
             piece.contour = contoursB[0];
             
+            // initialize the solution locations
+            piece.guess_x = -1;
+            piece.guess_y = -1;
+            
             [[JSVsingleton sharedObj].pieces addObject:piece];
             
             
