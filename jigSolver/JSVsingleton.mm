@@ -8,6 +8,7 @@
 
 #import "JSVsingleton.h"
 #import "JSVpuzzlePiece.h"
+#import "JSVOpenCVSIFT.h"
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
 using namespace cv;
@@ -19,6 +20,7 @@ using namespace cv;
 @synthesize solutionImg;
 @synthesize piecesImg;
 @synthesize pieces;
+@synthesize resultPositions;
 
 + (JSVsingleton *) sharedObj{
     
@@ -34,6 +36,7 @@ using namespace cv;
         shared.solutionImg = [[UIImage alloc] init];
         shared.piecesImg = [[UIImage alloc] init];
         shared.pieces = [[NSMutableArray alloc] init];
+        shared.resultPositions [[NSMutableArray alloc] init];
     
     });
     
@@ -55,6 +58,25 @@ using namespace cv;
 - (UIImage *) getPieceOriginal: (int) index{
     JSVpuzzlePiece *piece = self.pieces[index];
     return MatToUIImage(piece.originalImage.clone());;
+}
+
+- (void) processPieces{
+    
+    Mat result;
+    [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:2 row:2 result:result];
+    
+    // now convert result into the result
+    
+    
+}
+
+- (UIImage *)returnCombinedSOlution{
+    
+    // WORKING ON IT.
+    Mat finalResult;
+    [JSVOpenCVSIFT combineResul:self.pieces withFinalMatches:result result:finalResult];
+    return MatToUIImage(finalResult);
+    
 }
 
 

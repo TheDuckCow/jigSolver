@@ -42,14 +42,9 @@ using namespace cv;
     
     
     Mat result;
-    
     [JSVOpenCVSIFT matchPieces:segmentedPieces withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
-//    UIImage * match = [JSVOpenCVSIFT matchPieceWithSolution:piece withSolution:[UIImage imageNamed:solutions[0]]];
-    
     
     Mat finalResult;
-    
-    
     [JSVOpenCVSIFT combineResul:segmentedPieces withFinalMatches:result result:finalResult];
     
     UIImage * yo = MatToUIImage(finalResult);

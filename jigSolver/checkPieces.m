@@ -17,34 +17,45 @@
 @property (strong, nonatomic) NSArray *pageTitles;
 @property (strong, nonatomic) NSArray *pageImages;
 
+@property int state;
 @end
 
 @implementation checkPieces
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.state = 0;
     // Do any additional setup after loading the view.
     
-    // Create the data model
-    _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
-    _pageImages = @[@"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG"];
-    
-    // Create page view controller
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-    self.pageViewController.dataSource = self;
-    
-    PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    // Change the size of page view controller
-    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50);
-    
-    [self addChildViewController:_pageViewController];
-    [self.view addSubview:_pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
+    // run the heavy backend stuff... maybe put up temporary image for the start saying "processing"
     
     
+}
+
+- (void) viewDidAppear:(BOOL)animated{
+    if (self.state == 0){
+        // Create the data model
+        _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
+        _pageImages = @[@"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG"];
+        
+        // Create page view controller
+        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+        self.pageViewController.dataSource = self;
+        
+        PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+        NSArray *viewControllers = @[startingViewController];
+        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // Change the size of page view controller
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50);
+        
+        [self addChildViewController:_pageViewController];
+        [self.view addSubview:_pageViewController.view];
+        [self.pageViewController didMoveToParentViewController:self];
+        
+        self.state=1;
+        
+    }
 }
 
 - (IBAction)startWalkthrough:(id)sender {

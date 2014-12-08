@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
     <dependencies>
-        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment version="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -177,6 +177,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="6ng-sZ-3On"/>
+                                <exclude reference="OD5-ab-nvZ"/>
+                                <exclude reference="5wd-SV-TQ9"/>
+                                <exclude reference="bCQ-ob-nKl"/>
+                                <exclude reference="weo-Dq-o8u"/>
                                 <exclude reference="4Mn-8u-vl6"/>
                                 <exclude reference="4rk-aq-FhP"/>
                                 <exclude reference="CBr-Zd-md3"/>
@@ -184,17 +189,12 @@
                                 <exclude reference="dPk-jG-EIG"/>
                                 <exclude reference="eC3-Ye-sO1"/>
                                 <exclude reference="rH8-e3-s12"/>
-                                <exclude reference="6ng-sZ-3On"/>
-                                <exclude reference="OD5-ab-nvZ"/>
                                 <exclude reference="7NG-dj-Bj9"/>
                                 <exclude reference="BZs-eS-5AM"/>
                                 <exclude reference="Kzf-hS-UWr"/>
                                 <exclude reference="Y8O-QZ-CIM"/>
                                 <exclude reference="c2a-zy-D6u"/>
                                 <exclude reference="loP-aQ-caC"/>
-                                <exclude reference="5wd-SV-TQ9"/>
-                                <exclude reference="bCQ-ob-nKl"/>
-                                <exclude reference="weo-Dq-o8u"/>
                             </mask>
                         </variation>
                     </view>
@@ -244,38 +244,39 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add/remove every piece you want to find the location for" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDp-Kk-ice">
-                                <rect key="frame" x="96" y="563.5" width="408" height="17"/>
+                                <rect key="frame" x="96" y="564" width="408" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_2773" translatesAutoresizingMaskIntoConstraints="NO" id="W4A-Lh-a5g">
-                                <rect key="frame" x="16" y="-924" width="568" height="2448"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W4A-Lh-a5g">
+                                <rect key="frame" x="0.0" y="52" width="600" height="484"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="W4A-Lh-a5g" secondAttribute="bottom" constant="8" symbolic="YES" id="1Kj-3x-UpF"/>
                             <constraint firstItem="bDp-Kk-ice" firstAttribute="centerY" secondItem="Lsg-bZ-Aho" secondAttribute="centerY" id="7BT-ny-EjJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lsg-bZ-Aho" secondAttribute="trailing" constant="-16" id="8bd-RI-DsQ"/>
-                            <constraint firstAttribute="centerX" secondItem="W4A-Lh-a5g" secondAttribute="centerX" id="CHK-Sa-V7s"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="W4A-Lh-a5g" secondAttribute="trailing" id="El8-QD-dCC"/>
                             <constraint firstAttribute="centerX" secondItem="bDp-Kk-ice" secondAttribute="centerX" id="IMr-Ko-keY"/>
-                            <constraint firstAttribute="centerY" secondItem="W4A-Lh-a5g" secondAttribute="centerY" id="MUY-Dh-SwN"/>
                             <constraint firstItem="h4a-UC-OB9" firstAttribute="top" secondItem="Lsg-bZ-Aho" secondAttribute="bottom" id="Qcl-al-lQT"/>
                             <constraint firstItem="W4A-Lh-a5g" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leadingMargin" id="RqX-Kq-GFZ"/>
+                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="trailing" secondItem="Lsg-bZ-Aho" secondAttribute="trailing" id="bXv-0Z-ROf"/>
                             <constraint firstItem="Lsg-bZ-Aho" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leadingMargin" constant="-16" id="gDr-RW-ySe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W4A-Lh-a5g" secondAttribute="trailing" id="iJz-Ej-yO5"/>
                             <constraint firstItem="Lsg-bZ-Aho" firstAttribute="leading" secondItem="W4A-Lh-a5g" secondAttribute="trailing" id="nNA-m0-8kg"/>
                             <constraint firstItem="W4A-Lh-a5g" firstAttribute="top" secondItem="lzl-Yb-zJe" secondAttribute="bottom" id="p0W-rX-gNN"/>
                             <constraint firstItem="bDp-Kk-ice" firstAttribute="centerX" secondItem="Lsg-bZ-Aho" secondAttribute="centerX" id="qLQ-rx-9Zc"/>
+                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="top" secondItem="lzl-Yb-zJe" secondAttribute="bottom" constant="8" symbolic="YES" id="thI-3e-rP5"/>
+                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="leading" secondItem="Lsg-bZ-Aho" secondAttribute="leading" id="z24-g3-Sb0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="RqX-Kq-GFZ"/>
                                 <exclude reference="iJz-Ej-yO5"/>
                                 <exclude reference="p0W-rX-gNN"/>
-                                <exclude reference="IMr-Ko-keY"/>
                                 <exclude reference="nNA-m0-8kg"/>
+                                <exclude reference="IMr-Ko-keY"/>
                             </mask>
                         </variation>
                     </view>
@@ -362,7 +363,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the final result, results may vary" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCZ-CI-ncn">
-                                <rect key="frame" x="175.5" y="563.5" width="249" height="17"/>
+                                <rect key="frame" x="176" y="564" width="249" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -706,7 +707,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_2773" width="3264" height="2448"/>
         <image name="logoImg" width="137" height="49"/>
     </resources>
 </document>
