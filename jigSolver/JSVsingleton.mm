@@ -23,6 +23,8 @@ using namespace cv;
 @synthesize combinedImg;
 @synthesize pieces;
 @synthesize resultPositions;
+@synthesize rows;
+@synthesize cols;
 
 + (JSVsingleton *) sharedObj{
     
@@ -47,6 +49,8 @@ using namespace cv;
         self.pieces = [[NSMutableArray alloc] init];
         self.resultPositions = [[NSMutableArray alloc] init];
         self.combinedImg = [[UIImage alloc] init];
+        self.rows = 2;
+        self.cols = 2;  // default 2x2 puzzle
     }
     return self;
 }
@@ -72,7 +76,7 @@ using namespace cv;
     Mat result;
     
     [JSVopenCV createPiecesFromImage: [JSVsingleton sharedObj].piecesImg isSolution:NO];
-    [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:2 row:2 result:result];
+    [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:self.cols row:self.rows result:result];
     
     // now convert result into the result
     Mat finalResult;
@@ -82,6 +86,39 @@ using namespace cv;
     
 }
 
+- (void) determinePuzzleSize{
+    // determine the rows and columns of the puzzle based on input pieces
+    // defautl elsewhere is set to be 2x2 (when initialized)
+    int number = (int)[self.pieces count];
+    if (number == 4){
+        self.cols = 2;
+        self.rows = 2;
+    }
+    else if(number == 9){
+        self.rows = 3;
+        self.cols = 3;
+    }
+    else if (number == 16){
+        self.rows = 4;
+        self.cols = 4;
+    }
+    else if (number == 2){
+        self.rows = 1;
+        self.cols = 2;
+    }
+    else if (number == 1){
+        self.rows = 1;
+        self.cols = 1;
+    }
+    else{
+        // is this really the best assumption/default case?
+        self.rows = 2;
+        self.cols = 2;
+    }
+    
+    NSLog(@" PUZZLE SIZE? %i %i",self.cols, self.rows);
+    
+}
 
 
 // creates methods: getPieceMask: withIndex

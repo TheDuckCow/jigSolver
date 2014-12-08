@@ -51,7 +51,7 @@
     self.ready = YES;
     
     // update the title for number of selected pieces
-    self.title = [NSString stringWithFormat: @"Selected Pieces (%i)",[[JSVsingleton sharedObj].pieces count]];
+    self.title = [NSString stringWithFormat: @"Selected Pieces (%lu)",(unsigned long)[[JSVsingleton sharedObj].pieces count]];
     
 }
 
@@ -88,7 +88,11 @@
 
 - (IBAction)navNext:(id)sender {
     
+    // here do the logic of determining the number of puzzle pieces from input
+    
+    
     UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"checkPieces"];
     [self.navigationController pushViewController:nextView animated:YES];
 }
+
 @end

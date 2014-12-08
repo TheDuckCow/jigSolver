@@ -143,9 +143,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
         
     }
     
-    for (JSVpuzzlePiece * p  in pieces) {
+//    for (JSVpuzzlePiece * p  in pieces) {
 //        printf("%d, %d %f\n", p.guess_x, p.guess_y, p.guess_rotation);
-    }
+//    }
     
 
     //Finding good matches

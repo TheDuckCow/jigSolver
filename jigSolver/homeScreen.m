@@ -100,7 +100,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"Cell: %i",indexPath.row);
+    //NSLog(@"Cell: %i",indexPath.row);
     // segue to the according one.
     if (indexPath.row==1){
         
