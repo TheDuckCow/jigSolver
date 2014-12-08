@@ -92,14 +92,11 @@ using namespace cv;
         Mat zero = Mat::zeros(originalImage.rows, originalImage.cols, CV_8UC1);
         int x = piece.guess_x;
         int y = piece.guess_y;
-        NSLog(@"%d %d", x, y);
-        for(int i = x * piece_width; i < (x + 1) * piece_width; i++){
-            for (int j = y * piece_height; j < (y + 1) * piece_height; j++){
-                for (int qwerty=0; qwerty< [[JSVsingleton sharedObj].pieces count]; qwerty++){
+        if (x != -1 && y != -1) {
+            NSLog(@"%d %d", x, y);
+            for(int i = x * piece_width; i < (x + 1) * piece_width; i++){
+                for (int j = y * piece_height; j < (y + 1) * piece_height; j++){
                     zero.at<uchar>(j,i) = 255;
-//                    zero.at<Vec4b>(j,i)[1] = 255;
-//                    zero.at<Vec4b>(j,i)[2] = 255;
-//                    zero.at<Vec4b>(j,i)[3] = 255;
                 }
             }
         }

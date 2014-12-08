@@ -134,8 +134,8 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     //Storing it inside array
     for (int i = 0; i < finalResult.cols; i ++) {
         for(int j = 0; j < finalResult.rows; j++){
-//            if ( finalResult.at<char>(i, j) == ! -1)
-//                continue;
+            if ( finalResult.at<char>(i, j) >= pieces.count)
+                continue;
             JSVpuzzlePiece * piece = pieces[finalResult.at<char>(i, j)];
             piece.guess_x = i;
             piece.guess_y = j;
