@@ -428,4 +428,38 @@ void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
     }
 }
 
+
+
++(void) combineResul:(NSArray *) segmentedPieces withFinalMatches:(cv::Mat &) solutionMatch result:(cv::Mat &) finalResult{
+    
+    for(int i = 0 ; i < solutionMatch.rows; i ++ ) {
+        Mat rowResult;
+        for(int j =0; j < solutionMatch.cols; j++ ){
+
+            int index = solutionMatch.at<char>(j, i);
+            if (index == -1) continue;
+            
+            JSVpuzzlePiece * image = segmentedPieces[index];
+            Mat temp = image.originalImage.clone();
+            if (rowResult.empty()) {
+                rowResult = temp.clone();
+                NSLog(@"Empty");
+        
+            } else {
+                Mat clone = rowResult.clone();
+                [JSVOpenCVSIFT combineImageLeftRight:clone right:temp result:rowResult];
+                NSLog(@"not empty");
+            }
+        }
+        if (finalResult.empty()) {
+            finalResult = rowResult;
+        } else {
+            Mat clone = finalResult.clone();
+            [JSVOpenCVSIFT combineImageTopBottm:clone bottom:rowResult result:finalResult];
+        }
+        printf("\n");
+    }
+    
+}
+
 @end

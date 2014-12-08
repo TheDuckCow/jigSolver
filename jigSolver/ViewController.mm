@@ -48,33 +48,9 @@ using namespace cv;
     
     
     Mat finalResult;
-    for(int i = 0 ; i < result.rows; i ++ ) {
-        Mat rowResult;
-        for(int j =0; j < result.cols; j++ ){
-
-            int index = result.at<char>(j, i);
-            if (index == -1) continue;
-            
-            JSVpuzzlePiece * image = segmentedPieces[index];
-            Mat temp = image.originalImage.clone();
-            if (rowResult.empty()) {
-                rowResult = temp.clone();
-                NSLog(@"Empty");
-        
-            } else {
-                Mat clone = rowResult.clone();
-                [JSVOpenCVSIFT combineImageLeftRight:clone right:temp result:rowResult];
-                NSLog(@"not empty");
-            }
-        }
-        if (finalResult.empty()) {
-            finalResult = rowResult;
-        } else {
-            Mat clone = finalResult.clone();
-            [JSVOpenCVSIFT combineImageTopBottm:clone bottom:rowResult result:finalResult];
-        }
-        printf("\n");
-    }
+    
+    
+    [JSVOpenCVSIFT combineResul:segmentedPieces withFinalMatches:result result:finalResult];
     
     UIImage * yo = MatToUIImage(finalResult);
     

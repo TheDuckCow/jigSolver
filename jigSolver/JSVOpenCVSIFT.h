@@ -18,4 +18,6 @@
 +(void) combineImageLeftRight:(cv::Mat &) left right: (cv::Mat &) right result:(cv::Mat &) result;
 +(void) combineImageTopBottm: (cv::Mat &) top bottom: (cv::Mat &) bottom result:(cv::Mat &) result;
 
++(void) combineResul:(NSArray *) segmentedPieces withFinalMatches:(cv::Mat &) solutionMatch result:(cv::Mat &) finalResult;
+
 @end
