@@ -138,7 +138,9 @@
 
 
 - (IBAction)navNext:(id)sender {
-    
+    // set size of puzzle
+    [[JSVsingleton sharedObj] determinePuzzleSize];
+    // go to next view
     UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"finalResult"];
     [self.navigationController pushViewController:nextView animated:YES];
 }

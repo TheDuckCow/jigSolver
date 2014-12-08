@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSMutableArray *pieces;
 @property (nonatomic, strong) JSVpuzzlePiece * solution;
 @property (nonatomic, strong) NSMutableArray *resultPositions;
+@property (nonatomic) int rows;
+@property (nonatomic) int cols;
 
 
 
@@ -30,6 +32,7 @@
 - (UIImage *) getPieceMask: (int) index;
 - (UIImage *) getPieceMaskInverse: (int) index;
 - (UIImage *) getPieceOriginal: (int) index;
+- (void) determinePuzzleSize;
 - (void) processPieces;
 
 @end

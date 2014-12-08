@@ -10,6 +10,7 @@
 
 @interface JSVDimViewController : UIViewController <UIScrollViewDelegate>
 
+- (IBAction)navNext:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *canvas;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *maskView;

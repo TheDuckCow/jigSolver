@@ -58,7 +58,7 @@
     
     UIImage *img = [[UIImage alloc]init];
     UIImage *solution = [[UIImage alloc]init];
-    NSLog(@"debug state: %i",self.debugState);
+    //NSLog(@"debug state: %i",self.debugState);
     
     switch (self.debugState){
         case 0:
@@ -90,7 +90,7 @@
         default:
             // same as case 0, so can set debugstate to 1
             self.debugState = 0;
-            NSLog(@"reached end?");
+            //NSLog(@"reached end?");
             img = [UIImage imageNamed:@"IMG_2785.JPG"];
             solution = [UIImage imageNamed:@"IMG_2774.png"];
             break;

@@ -34,8 +34,8 @@
     // Do any additional setup after loading the view.
     
     //NSLog(@"FROM PAGE VIEW: %i", self.pageIndex);
-    self.imgMask.image = [[JSVsingleton sharedObj] getPieceMaskInverse:self.pageIndex];
-    self.pieceImgView.image = [[JSVsingleton sharedObj] getPieceOriginal:self.pageIndex];
+    self.imgMask.image = [[JSVsingleton sharedObj] getPieceMaskInverse:(int)self.pageIndex];
+    self.pieceImgView.image = [[JSVsingleton sharedObj] getPieceOriginal:(int)self.pageIndex];
     self.source.image = [JSVsingleton sharedObj].solutionImg;
     
     
