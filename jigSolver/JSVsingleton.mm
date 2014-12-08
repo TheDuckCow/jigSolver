@@ -31,20 +31,24 @@ using namespace cv;
     
     // instance the class only the first time
     dispatch_once(&pred, ^{
-        shared = [[JSVsingleton alloc] init];
-        
-        shared.testString = [[NSString alloc] init];
-        shared.solutionImg = [[UIImage alloc] init];
-        shared.piecesImg = [[UIImage alloc] init];
-        shared.pieces = [[NSMutableArray alloc] init];
-        shared.resultPositions = [[NSMutableArray alloc] init];
-        shared.combinedImg = [[UIImage alloc] init];
-    
+        shared = [[self alloc] init];
     });
     
     return shared;
 }
 
+
+-(id) init{
+    if (self = [super init]) {
+        self.testString = [[NSString alloc] init];
+        self.solutionImg = [[UIImage alloc] init];
+        self.piecesImg = [[UIImage alloc] init];
+        self.pieces = [[NSMutableArray alloc] init];
+        self.resultPositions = [[NSMutableArray alloc] init];
+        self.combinedImg = [[UIImage alloc] init];
+    }
+    return self;
+}
 - (UIImage *) getPieceMask: (int) index{
     JSVpuzzlePiece *piece = self.pieces[index];
     return MatToUIImage(piece.mask.clone());;
@@ -64,13 +68,13 @@ using namespace cv;
 
 - (void) processPieces{
     
-    NSLog(@"num here1: %i",[self.pieces count]);
-    
     Mat result;
     NSMutableArray *piecesArray = [[NSMutableArray alloc] initWithArray: self.pieces];
+    
     [JSVOpenCVSIFT matchPieces:piecesArray withSolution:self.solutionImg col:2 row:2 result:result];
     
-    NSLog(@"num here2: %i",[self.pieces count]);
+    self.pieces = piecesArray;
+    
     
     // now convert result into the result
     Mat finalResult;
@@ -78,8 +82,8 @@ using namespace cv;
     [JSVOpenCVSIFT combineResul:piecesArray withFinalMatches:result result:finalResult];
     self.combinedImg = MatToUIImage(finalResult);
     
-    NSLog(@"num here3: %i",[self.pieces count]);
     
+    self.pieces = piecesArray;
     
     
     
