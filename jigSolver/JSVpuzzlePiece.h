@@ -14,13 +14,10 @@ using namespace cv;
 
 @interface JSVpuzzlePiece : NSObject
 
-@property Mat originalImage;
-@property Mat mask;
-@property vector<cv::Point> contour;
-// make the "JSVedge class", which contains information about each edge
-//@property JSVedge *top 
-//@property JSVedge *left
-//@property JSVedge *bottom
-//@property JSVedge *right
+@property (nonatomic) Mat originalImage;
+@property (nonatomic) Mat mask;
+@property (nonatomic) vector<cv::Point> contour;
+@property (nonatomic) int guess_x;
+@property (nonatomic) int guess_y;
 
 @end

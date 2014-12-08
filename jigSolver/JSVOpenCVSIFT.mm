@@ -112,14 +112,16 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
                 finalResult.at<char>(closest.pt.x, closest.pt.y) = item.index;
             }
         }
+    }
+    
+    //Storing it inside array
+    for (int i = 0; i < finalResult.cols; i ++) {
+        for(int j = 0; j < finalResult.rows; j++){
+            JSVpuzzlePiece * piece = pieces[finalResult.at<char>(i, j)];
+            piece.guess_x = i;
+            piece.guess_y = j;
+        }
         
-//        printf("%d %d\n", (int)y, (int)x);
-//        for(int i = 0 ; i < finalResult.rows; i ++ ) {
-//            for(int j =0; j < finalResult.cols; j++ ){
-//                printf("%d ", finalResult.at<char>(i, j));
-//            }
-//            printf("\n");
-//        }
     }
 
     //Finding good matches
@@ -136,6 +138,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     
 //    return MatToUIImage(img_matches.clone());
 }
+
+#pragma mark - Comparators
+
 bool compareNeighbor(const MatchDistance & a, const MatchDistance & b){
     return a.distance < b.distance;
 }
@@ -145,6 +150,7 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 }
 
 
+#pragma mark - SIFT Extraction
 + (void) extractSIFTDescriptors: (JSVpuzzlePiece *) puzzle withKeyPoints: (vector<KeyPoint> &) keypoints descriptor: (Mat &) descriptors {
     //Referencing from lab
     SiftFeatureDetector detector(0, 1);
@@ -172,7 +178,6 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     }
 }
 
-
 + (void) findGoodMatchesWithDescriptorPiece:(Mat &) descriptorPiece descriptorSolution: (Mat &) descriptorSolution keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution matches:(vector<DMatch> &) final_matches{
     
     FlannBasedMatcher matcher;
@@ -189,6 +194,7 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     final_matches = matches;
 }
 
+#pragma mark - Score computation for matches
 + (double) computeNormalizedStandDeviationWithMatches:(vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolutionvector solutionCentroid: (Point2f &) solutionCentroid{
     
     vector<Point2f> piecePoints, solutionPoints;
@@ -229,6 +235,8 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     
     return result;
 }
+
+#pragma mark - Filtering
 
 +(void) filterBestDistanceWithMatches:(vector<DMatch> &) matches bestNum: (int) top_num {
     vector<int> index_to_remove;
@@ -305,6 +313,10 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     removeIndexFromVector(matches, index_to_remove);
 }
 
++(void) filterBasedOnKeyPointOrientatio: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
+    
+}
+
 
 +(void) filterBasedOnOrientations: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
     
@@ -359,7 +371,7 @@ void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
         }
 }
 
-
+#pragma mark - Helper functions
 
 +(JSVpuzzlePiece *) largestPuzzlePieceInPieces:(NSArray *) pieces {
     
@@ -388,6 +400,9 @@ void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
     [NSException raise:exceptionHeader format:@"largestPuzzle Piece can't find a result."];
     return nil;
 }
+
+
+#pragma mark - Result production from matches
 
 +(void) combineImageLeftRight:(Mat &) left right: (Mat &) right result:(Mat &) result{
     result = Mat:: zeros(max(left.rows, right.rows), left.cols + right.cols, left.type());
