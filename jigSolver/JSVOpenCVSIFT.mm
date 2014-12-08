@@ -134,6 +134,8 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     //Storing it inside array
     for (int i = 0; i < finalResult.cols; i ++) {
         for(int j = 0; j < finalResult.rows; j++){
+//            if ( finalResult.at<char>(i, j) == ! -1)
+//                continue;
             JSVpuzzlePiece * piece = pieces[finalResult.at<char>(i, j)];
             piece.guess_x = i;
             piece.guess_y = j;
@@ -144,6 +146,7 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     for (JSVpuzzlePiece * p  in pieces) {
 //        printf("%d, %d %f\n", p.guess_x, p.guess_y, p.guess_rotation);
     }
+    
 
     //Finding good matches
 //    Mat img_matches;

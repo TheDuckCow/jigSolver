@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#ifndef __CV__
 #import <opencv2/opencv.hpp>
+#endif
+
 
 @interface JSVpuzzlePiece : NSObject
 

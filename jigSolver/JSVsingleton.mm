@@ -11,6 +11,7 @@
 #import "JSVOpenCVSIFT.h"
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
+#import "JSVopenCV.h"
 using namespace cv;
 
 @implementation JSVsingleton
@@ -69,20 +70,14 @@ using namespace cv;
 - (void) processPieces{
     
     Mat result;
-    NSMutableArray *piecesArray = [[NSMutableArray alloc] initWithArray: self.pieces];
     
-    NSLog(@"%@", self.pieces);
-    
-    [JSVOpenCVSIFT matchPieces:piecesArray withSolution:self.solutionImg col:2 row:2 result:result];
-    NSLog(@"%@", self.pieces);
-    
-    self.pieces = piecesArray;
-    
+    [JSVopenCV createPiecesFromImage: [JSVsingleton sharedObj].piecesImg isSolution:NO];
+    [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:2 row:2 result:result];
     
     // now convert result into the result
     Mat finalResult;
     
-    [JSVOpenCVSIFT combineResul:piecesArray withFinalMatches:result result:finalResult];
+    [JSVOpenCVSIFT combineResul:self.pieces withFinalMatches:result result:finalResult];
     self.combinedImg = MatToUIImage(finalResult);
     
 }

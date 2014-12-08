@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -221,10 +221,10 @@
             </objects>
             <point key="canvasLocation" x="2756" y="-926"/>
         </scene>
-        <!--Select Pieces-->
+        <!--Preview-->
         <scene sceneID="udt-2y-dA1">
             <objects>
-                <viewController storyboardIdentifier="selectPictures" id="6jR-8P-QHC" customClass="selectPieces" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selectPictures" id="6jR-8P-QHC" customClass="JSVDimViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lzl-Yb-zJe"/>
                         <viewControllerLayoutGuide type="bottom" id="h4a-UC-OB9"/>
@@ -243,58 +243,55 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W4A-Lh-a5g">
-                                <rect key="frame" x="0.0" y="44" width="600" height="499"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add/remove every piece you want to find the location for" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDp-Kk-ice">
-                                <rect key="frame" x="16" y="551" width="568" height="34"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-KG-Qt5">
+                                <rect key="frame" x="100" y="52" width="400" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="JFr-5y-wjY"/>
+                                    <constraint firstAttribute="height" constant="300" id="Oql-tx-bFp"/>
+                                    <constraint firstAttribute="width" constant="400" id="lyy-RM-7kE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6jR-8P-QHC" id="5bI-A6-cj7"/>
+                                </connections>
+                            </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LgW-Wt-Z81">
+                                <rect key="frame" x="16" y="352" width="568" height="192"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1EE-cO-dmO"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
+                                <rect key="frame" x="16" y="556" width="568" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="W4A-Lh-a5g" secondAttribute="bottom" constant="1" id="1Kj-3x-UpF"/>
+                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="LgW-Wt-Z81" secondAttribute="bottom" id="0Bs-tC-nDJ"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1EE-cO-dmO" secondAttribute="trailing" id="3WE-95-a8c"/>
+                            <constraint firstItem="1EE-cO-dmO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZY9-KG-Qt5" secondAttribute="bottom" id="6aT-pl-3KS"/>
+                            <constraint firstAttribute="centerX" secondItem="ZY9-KG-Qt5" secondAttribute="centerX" id="8ET-QG-NDj"/>
+                            <constraint firstItem="1EE-cO-dmO" firstAttribute="centerX" secondItem="LgW-Wt-Z81" secondAttribute="centerX" id="8I1-eA-eLQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lsg-bZ-Aho" secondAttribute="trailing" constant="-16" id="8bd-RI-DsQ"/>
-                            <constraint firstAttribute="centerX" secondItem="bDp-Kk-ice" secondAttribute="centerX" id="IMr-Ko-keY"/>
+                            <constraint firstItem="1EE-cO-dmO" firstAttribute="centerY" secondItem="LgW-Wt-Z81" secondAttribute="centerY" id="Ccx-0d-5K4"/>
+                            <constraint firstItem="ZY9-KG-Qt5" firstAttribute="top" secondItem="lzl-Yb-zJe" secondAttribute="bottom" constant="8" id="Ehp-20-vXB"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="LgW-Wt-Z81" secondAttribute="trailing" id="LAV-CT-Si6"/>
                             <constraint firstItem="h4a-UC-OB9" firstAttribute="top" secondItem="Lsg-bZ-Aho" secondAttribute="bottom" id="Qcl-al-lQT"/>
-                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leadingMargin" id="RqX-Kq-GFZ"/>
-                            <constraint firstAttribute="bottom" secondItem="bDp-Kk-ice" secondAttribute="bottom" constant="15" id="XbV-86-0Ew"/>
-                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="trailing" secondItem="Lsg-bZ-Aho" secondAttribute="trailing" id="bXv-0Z-ROf"/>
+                            <constraint firstAttribute="centerX" secondItem="LgW-Wt-Z81" secondAttribute="centerX" id="UFo-7l-BuA"/>
+                            <constraint firstItem="LgW-Wt-Z81" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZY9-KG-Qt5" secondAttribute="bottom" id="Z9q-Xw-RX5"/>
+                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="1EE-cO-dmO" secondAttribute="bottom" id="bJA-vX-46x"/>
                             <constraint firstItem="Lsg-bZ-Aho" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leadingMargin" constant="-16" id="gDr-RW-ySe"/>
-                            <constraint firstAttribute="trailing" secondItem="bDp-Kk-ice" secondAttribute="trailing" constant="16" id="hTx-Og-2Zh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="W4A-Lh-a5g" secondAttribute="trailing" id="iJz-Ej-yO5"/>
-                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="leading" secondItem="W4A-Lh-a5g" secondAttribute="trailing" id="nNA-m0-8kg"/>
-                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="top" secondItem="lzl-Yb-zJe" secondAttribute="bottom" id="p0W-rX-gNN"/>
-                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="top" secondItem="lzl-Yb-zJe" secondAttribute="bottom" id="thI-3e-rP5"/>
-                            <constraint firstItem="bDp-Kk-ice" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leading" constant="16" id="uZy-DC-6gm"/>
-                            <constraint firstItem="W4A-Lh-a5g" firstAttribute="leading" secondItem="Lsg-bZ-Aho" secondAttribute="leading" id="z24-g3-Sb0"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="RqX-Kq-GFZ"/>
-                                <exclude reference="iJz-Ej-yO5"/>
-                                <exclude reference="p0W-rX-gNN"/>
-                                <exclude reference="nNA-m0-8kg"/>
-                                <exclude reference="IMr-Ko-keY"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Select Pieces" id="UKQ-tk-qqO">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="F5F-cJ-C8h">
-                            <connections>
-                                <action selector="navNext:" destination="6jR-8P-QHC" id="bPy-KG-QGW"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Preview" id="UKQ-tk-qqO">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="F5F-cJ-C8h"/>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="imgView" destination="W4A-Lh-a5g" id="fSz-Cg-bZJ"/>
+                        <outlet property="canvas" destination="LgW-Wt-Z81" id="gee-IB-y7J"/>
+                        <outlet property="maskView" destination="1EE-cO-dmO" id="q9h-4c-6QG"/>
+                        <outlet property="rotationLabel" destination="18v-xr-XIZ" id="jLe-Fy-EgG"/>
+                        <outlet property="scrollView" destination="ZY9-KG-Qt5" id="yGR-Tm-aD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPa-Q8-vDW" userLabel="First Responder" sceneMemberID="firstResponder"/>

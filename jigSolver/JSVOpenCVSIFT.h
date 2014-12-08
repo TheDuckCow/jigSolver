@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+//#import <opencv2/opencv.hpp>
+
+#ifndef __CV__
 #import <opencv2/opencv.hpp>
+#endif
+
+
 
 @class JSVpuzzlePiece;
 @interface JSVOpenCVSIFT : NSObject
