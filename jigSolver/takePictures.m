@@ -12,6 +12,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *solutionImg;
 @property (strong, nonatomic) IBOutlet UIImageView *piecesImg;
 @property int state;
+@property int debugState;
 
 - (IBAction)navBack:(id)sender;
 - (IBAction)takeSolPic:(id)sender;
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.state = 0; // shouldn't be necessary
+    self.debugState = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,13 +56,55 @@
 
 - (IBAction)useIncluded:(id)sender {
     
-    // DEBUG for setting the images for each thing based on built in, faster debug
-    self.solutionImg.image = [UIImage imageNamed:@"IMG_2774.png"];
-    [JSVsingleton sharedObj].solutionImg = [UIImage imageNamed:@"IMG_2774.png"];
+    UIImage *img = [[UIImage alloc]init];
+    UIImage *solution = [[UIImage alloc]init];
+    NSLog(@"debug state: %i",self.debugState);
     
-    self.piecesImg.image = [UIImage imageNamed:@"IMG_2785.JPG"];
+    switch (self.debugState){
+        case 0:
+            // set 1!!
+            img = [UIImage imageNamed:@"IMG_2785"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            break;
+        case 1:
+            img = [UIImage imageNamed:@"IMG_2773"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            break;
+        case 2:
+            img = [UIImage imageNamed:@"IMG_2785"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            break;
+        case 3:
+            img = [UIImage imageNamed:@"IMG_2788.JPG"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            break;
+        case 4:
+            img = [UIImage imageNamed:@"IMG_2781.JPG"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            break;
+        case 5:
+            // set 2!!!!
+            img = [UIImage imageNamed:@"IMG_2871.JPG"];
+            solution = [UIImage imageNamed:@"IMG_2874.JPG"];
+            break;
+        default:
+            // same as case 0, so can set debugstate to 1
+            self.debugState = 0;
+            NSLog(@"reached end?");
+            img = [UIImage imageNamed:@"IMG_2785.JPG"];
+            solution = [UIImage imageNamed:@"IMG_2774.png"];
+            break;
+    }
+    
+    
+    self.debugState++;
+    // DEBUG for setting the images for each thing based on built in, faster debug
+    self.solutionImg.image = solution;
+    [JSVsingleton sharedObj].solutionImg = solution;
+    
+    self.piecesImg.image = img;
     /// versus IMG_2775.JPG and IMG_2785.JPG
-    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2785.JPG"];
+    [JSVsingleton sharedObj].piecesImg = img;
     
 }
 

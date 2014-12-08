@@ -18,5 +18,7 @@
 @property (nonatomic) int guess_x;
 @property (nonatomic) int guess_y;
 @property (nonatomic) double guess_rotation;
+@property (nonatomic) int offset_x;
+@property (nonatomic) int offset_y;
 
 @end

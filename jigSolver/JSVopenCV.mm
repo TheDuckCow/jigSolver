@@ -198,6 +198,11 @@ using namespace std;
                 
             }
             
+            //now set the relative offsets
+            piece.offset_x = x_lo;
+            piece.offset_y = y_lo;
+            NSLog(@" OUT PIECE: %i %i",piece.offset_x,piece.offset_y);
+            
             // now create the mask and cropped image based on these new points
             piece.mask = Mat::zeros(cv::Size(x_hi-x_lo,y_hi-y_lo),CV_8UC1); // check if off by one??
             
