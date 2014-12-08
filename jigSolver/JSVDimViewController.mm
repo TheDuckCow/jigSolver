@@ -76,16 +76,13 @@ using namespace cv;
         [self.scrollView addSubview:imageView];
         width += delta;
         Mat originalImage = [JSVsingleton  sharedObj].solution.originalImage.clone();
-        Mat zero = Mat::zeros(originalImage.rows, originalImage.cols, CV_8UC4);
+        Mat zero = Mat::zeros(originalImage.rows, originalImage.cols, CV_8UC1);
         int x = piece.guess_x;
         int y = piece.guess_y;
         NSLog(@"%d %d", x, y);
         for(int i = x * piece_width; i < (x + 1) * piece_width; i++){
             for (int j = y * piece_height; j < (y + 1) * piece_height; j++){
-                    zero.at<Vec4b>(j,i)[0] = 255;
-                    zero.at<Vec4b>(j,i)[1] = 255;
-                    zero.at<Vec4b>(j,i)[2] = 255;
-                    zero.at<Vec4b>(j,i)[3] = 255;
+                    zero.at<uchar>(j,i) = 255;
             }
         }
         Mat blurred;
