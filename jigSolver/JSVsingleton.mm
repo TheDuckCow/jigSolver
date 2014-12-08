@@ -25,6 +25,7 @@ using namespace cv;
 @synthesize resultPositions;
 @synthesize rows;
 @synthesize cols;
+@synthesize loadStatus;
 
 + (JSVsingleton *) sharedObj{
     
@@ -51,6 +52,7 @@ using namespace cv;
         self.combinedImg = [[UIImage alloc] init];
         self.rows = 2;
         self.cols = 2;  // default 2x2 puzzle
+        self.loadStatus = 0;
     }
     return self;
 }
@@ -116,7 +118,7 @@ using namespace cv;
         self.cols = 2;
     }
     
-    NSLog(@" PUZZLE SIZE? %i %i",self.cols, self.rows);
+    NSLog(@" Judzing puzzle size: (%i pieces) col,row:%i,%i",number,self.cols, self.rows);
     
 }
 

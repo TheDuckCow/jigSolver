@@ -12,12 +12,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
-#import <UIKit/UIKit.h>
 using namespace cv;
 
 @interface finalResult ()
 - (IBAction)returnHome:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *finalImageBG;
+@property (nonatomic) CGSize size;
+@property (nonatomic) int state;
+@property (strong, nonatomic) NSMutableArray *imageViews;
 
 @end
 
@@ -29,11 +31,16 @@ using namespace cv;
     
     // easy way out in case other things don't work.
     //self.finalImageBG.image = [JSVsingleton sharedObj].combinedImg;
+    self.imageViews = [[NSMutableArray alloc] init];
+    self.size = [UIScreen mainScreen].bounds.size;
+    self.state = 0;
     
 }
 
 
 -(void) viewDidAppear:(BOOL)animated{
+    
+    // first, remove all previously existing image views
     
     //do stuff here. for each piece
     for (int i=0; i< [[JSVsingleton sharedObj].pieces count]; i++){
@@ -41,10 +48,19 @@ using namespace cv;
         
         UIImage *maskImg = [self maskImage: [[JSVsingleton sharedObj] getPieceOriginal:i] withMask:[[JSVsingleton sharedObj] getPieceMaskInverse:i]];
         
+        int x = [JSVsingleton sharedObj].cols;
+        int y = [JSVsingleton sharedObj].rows;
+        
         // start by assuming 2x2
-        UIImageView *pieceBlock = [[UIImageView alloc] init];
+        double height = self.size.height*.75/y;
+        double width = self.size.width*.75/x;
+                                             
+        CGRect framed = CGRectMake(self.size.width*.25 - width/2, self.size.height*.25 - height/2, width, height);
+        NSLog(@" convert: %i %i",i%x,i/x);
+        
+        UIImageView *pieceBlock = [[UIImageView alloc] initWithFrame:framed];
         pieceBlock.image = maskImg;
-        //pieceBlock.frame = self.frame;
+        pieceBlock.contentMode = UIViewContentModeScaleAspectFit;
         
         [self.view addSubview:pieceBlock];
     }

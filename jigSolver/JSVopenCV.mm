@@ -138,8 +138,14 @@ using namespace std;
     blur(gray, gray, cv::Size(5,5));
     
     // dynamic threshold of some kind?
+    Mat tmp;
+    // attempting dynamic thresholding.. it's worse actually!
+    
+    // 65 is the magic number
     threshold(gray,dst,65,255,THRESH_BINARY);
-    blur(dst, dst, cv::Size(5,5));
+    //threshold(gray,dst,40,255,THRESH_BINARY);
+    //threshold(gray,dst,0,255,CV_THRESH_BINARY | CV_THRESH_OTSU);
+    //blur(tmp, dst, cv::Size(5,5));
     
     // dilate to fill any "holes"
     int erosion_size = 2;
@@ -147,6 +153,7 @@ using namespace std;
                                         cv::Size( 2*erosion_size + 1, 2*erosion_size+1 ),
                                         cv::Point( erosion_size, erosion_size ) );
     dilate(dst, dst, element, cv::Point(-1, -1), 1);
+    
     
     // Contours part
     vector<vector<cv::Point>> contours;
@@ -166,7 +173,8 @@ using namespace std;
     for (int i=0; i< contours.size(); i++){
         int area = contourArea(contours[i]);
         // this seems SUPER arbitrary.
-        if (area >500000){
+        //if (area >500000){
+        if (area >100000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
             
             // CREATE the puzzle piece. long winded process.

@@ -89,7 +89,7 @@
 - (IBAction)navNext:(id)sender {
     
     // here do the logic of determining the number of puzzle pieces from input
-    
+    [[JSVsingleton sharedObj] determinePuzzleSize];
     
     UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"checkPieces"];
     [self.navigationController pushViewController:nextView animated:YES];

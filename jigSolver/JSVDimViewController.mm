@@ -32,6 +32,7 @@ using namespace cv;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.masks = [NSMutableArray new];
+    self.checkToRun = -1;
     
 }
 
@@ -50,6 +51,18 @@ using namespace cv;
 //    Mat result;
 //    [JSVOpenCVSIFT matchPieces:[JSVsingleton sharedObj].pieces withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
 //    NSLog(@"DONE");
+    
+    
+    
+    // STUFF for not doing calculation again if it already did it once.
+    if (self.checkToRun == [JSVsingleton sharedObj].loadStatus){
+        return;
+    }
+    else{
+        self.checkToRun = [JSVsingleton sharedObj].loadStatus;
+    }
+    
+    
     [[JSVsingleton sharedObj] processPieces];
     
     self.canvas.image = MatToUIImage([JSVsingleton sharedObj].solution.originalImage.clone());
@@ -82,10 +95,12 @@ using namespace cv;
         NSLog(@"%d %d", x, y);
         for(int i = x * piece_width; i < (x + 1) * piece_width; i++){
             for (int j = y * piece_height; j < (y + 1) * piece_height; j++){
-                    zero.at<Vec4b>(j,i)[0] = 255;
-                    zero.at<Vec4b>(j,i)[1] = 255;
-                    zero.at<Vec4b>(j,i)[2] = 255;
-                    zero.at<Vec4b>(j,i)[3] = 255;
+                for (int qwerty=0; qwerty< [[JSVsingleton sharedObj].pieces count]; qwerty++){
+                    zero.at<Vec4b>(j,i)[qwerty] = 255;
+//                    zero.at<Vec4b>(j,i)[1] = 255;
+//                    zero.at<Vec4b>(j,i)[2] = 255;
+//                    zero.at<Vec4b>(j,i)[3] = 255;
+                }
             }
         }
         Mat blurred;

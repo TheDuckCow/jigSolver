@@ -17,4 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *rotationLabel;
 @property (nonatomic) BOOL scrollStarted;
 @property (nonatomic) NSMutableArray * masks;
+@property (nonatomic) int checkToRun;
 @end

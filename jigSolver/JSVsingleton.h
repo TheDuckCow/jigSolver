@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *resultPositions;
 @property (nonatomic) int rows;
 @property (nonatomic) int cols;
+@property (nonatomic) int loadStatus;
 
 
 

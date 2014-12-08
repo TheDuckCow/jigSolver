@@ -79,11 +79,24 @@
             solution = [UIImage imageNamed:@"sol_set1.JPG"];
             break;
         case 4:
-            img = [UIImage imageNamed:@"IMG_2781.JPG"];
-            solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            //img = [UIImage imageNamed:@"IMG_2781.JPG"];
+            //solution = [UIImage imageNamed:@"sol_set1.JPG"];
+            img = [UIImage imageNamed:@"set3_mess1.png"];
+            solution = [UIImage imageNamed:@"set3_solution.png"];
             break;
         case 5:
             // set 2!!!!
+            img = [UIImage imageNamed:@"set4_mess1.JPG"];
+            solution = [UIImage imageNamed:@"set4_sol.JPG"];
+            
+            break;
+        case 6:
+            // set 3!!!!
+            img = [UIImage imageNamed:@"set4_mess2.JPG"];
+            solution = [UIImage imageNamed:@"set4_sol.JPG"];
+            break;
+        case 7:
+            // set 3!!!!
             img = [UIImage imageNamed:@"IMG_2871.JPG"];
             solution = [UIImage imageNamed:@"IMG_2874.JPG"];
             break;
@@ -92,7 +105,7 @@
             self.debugState = 0;
             //NSLog(@"reached end?");
             img = [UIImage imageNamed:@"IMG_2785.JPG"];
-            solution = [UIImage imageNamed:@"IMG_2774.png"];
+            solution = [UIImage imageNamed:@"sol_set1.JPG"];
             break;
     }
     
@@ -111,6 +124,10 @@
 - (IBAction)navNext:(id)sender {
     
     if (self.solutionImg.image != nil && self.piecesImg.image != nil){
+        
+        // increment
+        [JSVsingleton sharedObj].loadStatus += 1;
+        
         UIViewController *nextView =[self.storyboard instantiateViewControllerWithIdentifier:@"selectPictures"];
         //[self presentModalViewController:nextView animated:YES];
         //[self presentViewController:nextView animated:YES completion:nil];
