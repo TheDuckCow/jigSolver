@@ -20,6 +20,7 @@ using namespace cv;
 struct ResultMatch {
     int index;
     double std;
+    double std_unnormalized;
     Point2f centroid;
 };
 
@@ -65,12 +66,17 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
         Point2f centroid;
         
         double std = [self computeNormalizedStandDeviationWithMatches:matches keyPointsPiece:keyPointsPiece keyPointsSolution:keyPointsSolution solutionCentroid:centroid];
+        double rotation = [self computeAverageAngleDiff:matches keyPointsPiece:keyPointsPiece keyPointsSolution:keyPointsSolution];
+        
+        piece.guess_rotation = rotation;
+        
         
         ResultMatch item;
         
         item.centroid = centroid;
         item.std = std;
         item.index = i;
+        item.std_unnormalized = [self computeSolutionDeviationWithMatches:matches solutionKeypoints:keyPointsSolution];
         results.push_back(item);
     }
     
@@ -78,7 +84,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     
     double piece_width = (double) solution_cols / col;
     double piece_height = (double) solution_rows / row;
+    double std_treshold = sqrt(piece_width * piece_width + piece_height * piece_height) / 2;//Above which there is no rotation
     
+    NSLog(@"threshold: %f", std_treshold);
     finalResult = Mat(row, col, CV_8SC1, -1);
     
     
@@ -87,6 +95,13 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
         ResultMatch item = results[i];
         double x = item.centroid.x / piece_width;
         double y = item.centroid.y / piece_height;
+        
+        NSLog(@"%f", item.std_unnormalized);
+        if (item.std_unnormalized > std_treshold){
+            JSVpuzzlePiece * piece = pieces[item.index];
+            piece.guess_rotation = 0;
+        }
+        
         
         if( finalResult.at<char>((int) x, (int)y) == -1){
             
@@ -122,6 +137,10 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
             piece.guess_y = j;
         }
         
+    }
+    
+    for (JSVpuzzlePiece * p  in pieces) {
+        printf("%d, %d %f\n", p.guess_x, p.guess_y, p.guess_rotation);
     }
 
     //Finding good matches
@@ -189,10 +208,13 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     
     [self filterBasedOnOrientations:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
     
+    [self filterBasedOnKeyPointOrientatio:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
+    
     [self filterLocationOutliers:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
     
     final_matches = matches;
 }
+
 
 #pragma mark - Score computation for matches
 + (double) computeNormalizedStandDeviationWithMatches:(vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolutionvector solutionCentroid: (Point2f &) solutionCentroid{
@@ -210,6 +232,21 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     
     return stdSolution / stdPiece;
 }
+
++ (double) computeSolutionDeviationWithMatches:(vector<DMatch> &) matches solutionKeypoints:(vector<KeyPoint> &) keyPoints{
+    
+    vector<Point2f> points;
+    
+    for(int i= 0; i < matches.size(); i++) {
+        points.push_back(keyPoints[matches[i].trainIdx].pt);
+    }
+    Point2f trash;
+    double stdPiece = [self computeStandardDeviationWithPoints:points centroid:trash];
+    
+    return stdPiece;
+}
+
+
 
 
 + (double) computeStandardDeviationWithPoints:(vector<Point2f> &) points centroid: (Point2f &) centroid{
@@ -261,6 +298,9 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 
 +(void) filterLocationOutliers: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
     
+    if (matches.size() == 0 ) {
+        return;
+    }
     //Calculating centroids and statistics for outlier
     vector<float> x, y;
     for (int i = 0; i < matches.size(); i ++) {
@@ -314,6 +354,54 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 }
 
 +(void) filterBasedOnKeyPointOrientatio: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
+    if (matches.size() == 0) {
+        return;
+    }
+    
+    //Calculating centroids and statistics for outlier
+    vector<float> x;
+    for (int i = 0; i < matches.size(); i ++) {
+        double originalAngle = keyPointPiece[matches[i].queryIdx].angle;
+        double destAngle = keyPointSolution[matches[i].trainIdx].angle;
+        double diff = fabs(originalAngle - destAngle);
+        diff = diff > 180? 360 - diff: diff;
+//        NSLog(@"%f %f %f, %f", originalAngle, destAngle, originalAngle - destAngle, diff);
+        x.push_back(diff);
+    }
+    
+    sort(x.begin(), x.end());
+    
+    float median_x = -1, first_quartile_x = -1, second_quartile_x = -1;
+    int size = (int) matches.size();
+    if (size % 2) {
+        // Odd
+        median_x = x[size / 2];
+        first_quartile_x = (x[size / 4] + x[size / 4 + 1]) / 2;
+        second_quartile_x = (x[size / 4 + size / 2] + x[size / 4 + size / 2 + 1]) / 2;
+    } else {
+        // Even
+        median_x = (x[size / 2] + x[size / 2 + 1]) / 2;
+        first_quartile_x = x[size / 4];
+        second_quartile_x = x[size / 2 + size / 4];
+    }
+    float scale = 1.5;
+    
+    float inter_quartile_x = second_quartile_x - first_quartile_x;
+    float max_x = median_x + scale * inter_quartile_x;
+    float min_x = median_x - scale * inter_quartile_x;
+    
+    vector<int> index_to_remove;
+    for (int i = 0; i < matches.size(); i ++) {
+        double originalAngle = keyPointPiece[matches[i].queryIdx].angle;
+        double destAngle = keyPointSolution[matches[i].trainIdx].angle;
+        double diff = fabs(originalAngle - destAngle);
+        diff = diff > 180? 360 - diff: diff;
+        if (!(diff <= max_x && diff >= min_x)) {
+            index_to_remove.push_back(i);
+        }
+    }
+    
+    removeIndexFromVector(matches, index_to_remove);
     
 }
 
@@ -321,8 +409,42 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 +(void) filterBasedOnOrientations: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
     
     const double threshold = 20.0 / 180 * M_PI;
-    vector<double> averages;
     vector<int> toBeDeleted;
+    
+    vector<double> averages;
+    
+    double totalAverage  = [self computeAverageRelativeAngleDiff:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution averages:averages];
+    
+    for(int i = 0; i < averages.size(); i++ ) {
+        if (fabs(averages[i] - totalAverage) > threshold) {
+            toBeDeleted.push_back(i);
+        }
+    }
+    removeIndexFromVector(matches, toBeDeleted);
+}
+
+
+#pragma mark - Computing orientation
+
+
++(double) computeAverageAngleDiff: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
+    vector<double> averages;
+    return [self computeAverageRelativeAngleDiff:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution averages:averages];
+}
+
+
+
+#pragma mark - Helper functions
+template<typename T>
+void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
+        sort(indeces.begin(), indeces.end(), std::greater<int>());
+        //Removing points with too far match distance
+        for(int i =0; i < indeces.size(); i++) {
+            array.erase(array.begin() + indeces[i]);
+        }
+}
+
++(double) computeAverageRelativeAngleDiff: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution averages:(vector<double> &) averages{
     
     double totalAverage = 0;
     for(int i = 0; i < matches.size(); i++ ) {
@@ -353,25 +475,8 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
         averages.push_back(angleDiffAverage);
     }
     totalAverage /= matches.size();
-    
-    for(int i = 0; i < averages.size(); i++ ) {
-        if (fabs(averages[i] - totalAverage) > threshold) {
-            toBeDeleted.push_back(i);
-        }
-    }
-    removeIndexFromVector(matches, toBeDeleted);
+    return totalAverage;
 }
-
-template<typename T>
-void removeIndexFromVector(vector<T> & array, vector<int> & indeces){
-        sort(indeces.begin(), indeces.end(), std::greater<int>());
-        //Removing points with too far match distance
-        for(int i =0; i < indeces.size(); i++) {
-            array.erase(array.begin() + indeces[i]);
-        }
-}
-
-#pragma mark - Helper functions
 
 +(JSVpuzzlePiece *) largestPuzzlePieceInPieces:(NSArray *) pieces {
     

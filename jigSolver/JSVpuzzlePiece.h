@@ -19,5 +19,6 @@ using namespace cv;
 @property (nonatomic) vector<cv::Point> contour;
 @property (nonatomic) int guess_x;
 @property (nonatomic) int guess_y;
+@property (nonatomic) double guess_rotation;
 
 @end
