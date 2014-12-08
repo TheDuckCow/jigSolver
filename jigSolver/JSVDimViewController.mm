@@ -67,8 +67,8 @@ using namespace cv;
     
     self.canvas.image = MatToUIImage([JSVsingleton sharedObj].solution.originalImage.clone());
     
-    double piece_width = [JSVsingleton sharedObj].solution.originalImage.cols / (double)2;
-    double piece_height = [JSVsingleton sharedObj].solution.originalImage.rows / (double)2;
+    double piece_width = [JSVsingleton sharedObj].solution.originalImage.cols / (double) [JSVsingleton sharedObj].cols;
+    double piece_height = [JSVsingleton sharedObj].solution.originalImage.rows / (double) [JSVsingleton sharedObj].rows;
     Mat black = Mat::zeros([JSVsingleton sharedObj].solution.originalImage.rows, [JSVsingleton sharedObj].solution.originalImage.cols, CV_8UC4);
     UIImage *blackImage = MatToUIImage(black);
     
@@ -96,7 +96,7 @@ using namespace cv;
         for(int i = x * piece_width; i < (x + 1) * piece_width; i++){
             for (int j = y * piece_height; j < (y + 1) * piece_height; j++){
                 for (int qwerty=0; qwerty< [[JSVsingleton sharedObj].pieces count]; qwerty++){
-                    zero.at<Vec4b>(j,i)[qwerty] = 255;
+                    zero.at<uchar>(j,i) = 255;
 //                    zero.at<Vec4b>(j,i)[1] = 255;
 //                    zero.at<Vec4b>(j,i)[2] = 255;
 //                    zero.at<Vec4b>(j,i)[3] = 255;
