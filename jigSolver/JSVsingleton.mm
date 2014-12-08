@@ -64,13 +64,23 @@ using namespace cv;
 
 - (void) processPieces{
     
+    NSLog(@"num here1: %i",[self.pieces count]);
+    
     Mat result;
-    [JSVOpenCVSIFT matchPieces:self.pieces withSolution:self.solutionImg col:2 row:2 result:result];
+    NSMutableArray *piecesArray = [[NSMutableArray alloc] initWithArray: self.pieces];
+    [JSVOpenCVSIFT matchPieces:piecesArray withSolution:self.solutionImg col:2 row:2 result:result];
+    
+    NSLog(@"num here2: %i",[self.pieces count]);
     
     // now convert result into the result
     Mat finalResult;
-    [JSVOpenCVSIFT combineResul:self.pieces withFinalMatches:result result:finalResult];
+    
+    [JSVOpenCVSIFT combineResul:piecesArray withFinalMatches:result result:finalResult];
     self.combinedImg = MatToUIImage(finalResult);
+    
+    NSLog(@"num here3: %i",[self.pieces count]);
+    
+    
     
     
 }

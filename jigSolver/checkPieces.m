@@ -33,7 +33,14 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated{
+    
+    // run once, but after view loaded
     if (self.state == 0){
+        
+        // heavy processing, will take some time
+        [[JSVsingleton sharedObj] processPieces];
+        
+        
         // Create the data model
         _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
         _pageImages = @[@"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG", @"IMG_2775.JPG"];

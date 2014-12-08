@@ -7,9 +7,11 @@
 //
 
 #import "finalResult.h"
+#import "JSVsingleton.h"
 
 @interface finalResult ()
 - (IBAction)returnHome:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *finalImageBG;
 
 @end
 
@@ -18,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.finalImageBG.image = [JSVsingleton sharedObj].combinedImg;
+    
 }
 
 - (void)didReceiveMemoryWarning {

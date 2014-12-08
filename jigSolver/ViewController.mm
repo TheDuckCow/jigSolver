@@ -9,6 +9,7 @@
 
 #import "JSVopenCV.h"
 #import "ViewController.h"
+#import "JSVsingleton.h"
 #import "JSVpuzzlePiece.h"
 #import "opencv2/highgui/ios.h"
 #import <opencv2/opencv.hpp>
@@ -38,11 +39,17 @@ using namespace cv;
     //self.swer.image = [JSVopenCV solvePuzzle:[UIImage imageNamed:scrambledPieces[0]] withOriginal: [UIImage imageNamed:solutions[0]]];
     
     NSArray * segmentedPieces = [JSVopenCV segmentPiecesFromBackground:[UIImage imageNamed:scrambledRectanlges[0]]];
-//    self.swer.image = MatToUIImage(piece.originalImage);
     
     
+    // conversion to new format
+    [JSVsingleton sharedObj].piecesImg = [UIImage imageNamed:@"IMG_2785.png"];
+    [JSVopenCV createPiecesFromImage: [JSVsingleton sharedObj].piecesImg ];
+    NSMutableArray *segNew = [[NSMutableArray alloc] initWithArray: [JSVsingleton sharedObj].pieces];
+    //segNew = [JSVsingleton sharedObj].pieces;
+    
+    // either segNew or segmentedPieces
     Mat result;
-    [JSVOpenCVSIFT matchPieces:segmentedPieces withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
+    [JSVOpenCVSIFT matchPieces:segNew withSolution:[UIImage imageNamed:solutions[0]] col:2 row:2 result:result];
     
     Mat finalResult;
     [JSVOpenCVSIFT combineResul:segmentedPieces withFinalMatches:result result:finalResult];
