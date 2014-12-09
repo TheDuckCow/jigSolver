@@ -141,10 +141,6 @@ using namespace std;
     Mat tmp;
     // attempting dynamic thresholding.. it's worse actually!
     
-    // NEW WAY OF THRESHOLD
-    //adaptiveThreshold( gray, dst, 255,ADAPTIVE_THRESH_GAUSSIAN_C,CV_THRESH_BINARY,17, -2 );
-    
-    
     // OLD WAY OF THRESHOLD
     threshold(gray,dst,65,255,THRESH_BINARY);
     //threshold(gray,dst,0,255,CV_THRESH_BINARY | CV_THRESH_OTSU);
@@ -156,6 +152,25 @@ using namespace std;
                                         cv::Size( 2*erosion_size + 1, 2*erosion_size+1 ),
                                         cv::Point( erosion_size, erosion_size ) );
     dilate(dst, dst, element, cv::Point(-1, -1), 1);
+    
+    
+    ///////// NEW custom method of segmentation
+    // doesn't really work all that well... sigh.
+//    Mat tmp2;
+//    cvtColor(srcMat,tmp2,CV_RGB2HSV);
+//    dst = Mat::zeros(tmp2.size(),CV_8UC1);
+//    for (int x=0; x< dst.rows; x++){
+//        for (int y=0; y< dst.cols; y++){
+//            Vec3b col = tmp2.at<Vec3b>(x,y);
+//            //if (col[2] > 60 && col[1] > 20){
+//            if (col[2] > 60 && col[1] > 30){
+//                dst.at<uchar>(x,y) = 255;
+//            }
+//        }
+//    }
+//    dilate(dst, dst, element, cv::Point(-1, -1), 1);
+    
+    ///////// NEW custom method of segmentation </end>
     
     
     // Contours part

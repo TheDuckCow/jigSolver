@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
     <dependencies>
-        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment version="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -327,7 +327,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-KG-Qt5">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-KG-Qt5">
                                 <rect key="frame" x="100" y="52" width="400" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Oql-tx-bFp"/>
@@ -341,8 +341,8 @@
                                 <rect key="frame" x="16" y="352" width="568" height="192"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1EE-cO-dmO"/>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
-                                <rect key="frame" x="253.5" y="571.5" width="93.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
+                                <rect key="frame" x="254" y="572" width="94" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Db6-3t-ETI"/>
                                 </constraints>
@@ -381,10 +381,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="fRD-PC-gVm"/>
-                                <exclude reference="fey-R4-DRJ"/>
                                 <exclude reference="df8-b0-88Y"/>
                                 <exclude reference="Yt4-47-Z3m"/>
+                                <exclude reference="fRD-PC-gVm"/>
+                                <exclude reference="fey-R4-DRJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -500,6 +500,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QxS-Or-IaL">
                                 <rect key="frame" x="0.0" y="44" width="600" height="492"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZO-Ei-0gk">
+                                <rect key="frame" x="218" y="500" width="165" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="gJv-AW-1HT"/>
+                                </constraints>
+                                <state key="normal" title="(restart the animation)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonFull:" destination="Tbj-Jc-PTB" eventType="touchUpInside" id="7Ju-YO-hQG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -508,9 +520,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="wuG-ya-9L6" secondAttribute="trailing" constant="-16" id="Dz0-Tt-TMJ"/>
                             <constraint firstItem="iil-Wu-UrE" firstAttribute="top" secondItem="wuG-ya-9L6" secondAttribute="bottom" id="Iuw-YY-38J"/>
                             <constraint firstItem="QxS-Or-IaL" firstAttribute="trailing" secondItem="wuG-ya-9L6" secondAttribute="trailing" id="Ucq-9E-yqC"/>
+                            <constraint firstAttribute="bottom" secondItem="UZO-Ei-0gk" secondAttribute="bottom" constant="82" id="aYn-hy-JkU"/>
                             <constraint firstItem="wuG-ya-9L6" firstAttribute="leading" secondItem="nkm-tn-gMI" secondAttribute="leadingMargin" constant="-16" id="fWL-rZ-C0a"/>
                             <constraint firstItem="UCZ-CI-ncn" firstAttribute="centerX" secondItem="wuG-ya-9L6" secondAttribute="centerX" id="iFT-Yt-qRb"/>
                             <constraint firstItem="UCZ-CI-ncn" firstAttribute="centerY" secondItem="wuG-ya-9L6" secondAttribute="centerY" id="oDf-Fb-2lG"/>
+                            <constraint firstItem="QxS-Or-IaL" firstAttribute="centerX" secondItem="UZO-Ei-0gk" secondAttribute="centerX" constant="-0.5" id="rcK-nQ-2ok"/>
                             <constraint firstItem="QxS-Or-IaL" firstAttribute="top" secondItem="XgL-Hv-i4t" secondAttribute="bottom" id="teT-AZ-SNl"/>
                         </constraints>
                     </view>

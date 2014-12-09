@@ -112,6 +112,10 @@ using namespace cv;
     self.scrollView.clipsToBounds = YES;
     self.scrollView.pagingEnabled = YES;
     
+    // run first time
+    JSVpuzzlePiece *piece = [JSVsingleton sharedObj].pieces[0];
+    self.rotationLabel.text = [NSString stringWithFormat:@"Swipe piece left/right to see others.\nEstimate of this piece's roation: %f°", piece.guess_rotation / M_PI * 180];
+    
     [self startAnimatingMaskWithIndex:0];
     
 }
@@ -121,7 +125,7 @@ using namespace cv;
     self.maskView.image = self.masks[index];
     
     [UIView animateWithDuration:.5 animations:^{
-        self.maskView.alpha = 0.3;
+        self.maskView.alpha = 0.6;
     }];
 }
 

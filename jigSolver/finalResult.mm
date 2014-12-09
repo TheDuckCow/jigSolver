@@ -20,6 +20,7 @@ using namespace cv;
 @property (nonatomic) CGSize size;
 @property (nonatomic) int state;
 @property (strong, nonatomic) NSMutableArray *imageViews;
+- (IBAction)buttonFull:(id)sender;
 
 @end
 
@@ -40,6 +41,13 @@ using namespace cv;
 
 -(void) viewDidAppear:(BOOL)animated{
     
+    [self rerunAnimations];
+    
+}
+
+-(void) rerunAnimations{
+    
+    
     // first, remove all previously existing image views
     for (int i=0; i< [self.imageViews count]; i++){
         [self.imageViews[i] removeFromSuperview];
@@ -52,7 +60,7 @@ using namespace cv;
         JSVpuzzlePiece *piece = [JSVsingleton sharedObj].pieces[i];
         
         UIImage *maskImg = [self maskImage: [[JSVsingleton sharedObj] getPieceOriginal:i] withMask:[[JSVsingleton sharedObj] getPieceMaskInverse:i]];
-        [self.imageViews addObject: maskImg];
+        
         
         // integers of tiles of the puzzle (number of pieces by number of pieces)
         int x = [JSVsingleton sharedObj].cols;
@@ -80,7 +88,7 @@ using namespace cv;
         // don't both with this scenario.
         
         // make the actual object frame
-        NSLog(@"div: %f >> %d %d %f", div, px, x, origDims.x);
+        //NSLog(@"div: %f >> %d %d %f", div, px, x, origDims.x);
         CGRect framed = CGRectMake(piece.offset_x*div, piece.offset_y*div + liny, px*div, py*div);
         
         // for future animation, where it currently is .. kinda. not really.
@@ -90,19 +98,26 @@ using namespace cv;
         pieceBlock.image = maskImg;
         pieceBlock.contentMode = UIViewContentModeScaleAspectFit;
         
-        [self.view addSubview:pieceBlock];
-        
+        [self.view insertSubview:pieceBlock atIndex:0];
+        [self.imageViews addObject: pieceBlock];
         
         
         
         // now setup the animation.
+        // get regular amount of width to divide by, from solution combined
+        // (can't be done on a piece-by-piece basis, also assumes all are ~ sqaure)
+        Mat tmp2;
+        UIImageToMat([JSVsingleton sharedObj].combinedImg,tmp2);
+        float prx = tmp2.cols/x;
+        float pry = tmp2.rows/y;
+        
         CGRect newFrame = CGRectMake (0,00,px*div,py*div);
         // calcualte where the piece SHOULD be.
-        newFrame.origin.x = px*piece.guess_x*div;
-        newFrame.origin.y = py*piece.guess_y*div + liny;
-        [UIView animateWithDuration:1.5
+        newFrame.origin.x = prx*piece.guess_x*div+(self.size.width-tmp2.cols*div)/2;
+        newFrame.origin.y = pry*piece.guess_y*div + liny;
+        [UIView animateWithDuration:2.5
                               delay: 0.75
-                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
+                            options: UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              pieceBlock.frame = newFrame;   // move
                          }
@@ -112,13 +127,14 @@ using namespace cv;
         
     }
     
+    
+    
 }
 
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    CGFloat width = CGRectGetWidth(self.view.bounds);
-    // called whenever there is a rotation, set width for scene..
+    [self rerunAnimations];
 
 }
 
@@ -151,18 +167,17 @@ using namespace cv;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)returnHome:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)buttonFull:(id)sender {
+    
+    [self rerunAnimations];
+    //self.finalImageBG.image = [JSVsingleton sharedObj].combinedImg;
+    
+}
+
 @end
