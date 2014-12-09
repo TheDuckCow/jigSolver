@@ -25,6 +25,7 @@
 @property (nonatomic) int rows;
 @property (nonatomic) int cols;
 @property (nonatomic) int loadStatus;
+@property (nonatomic) UIImage * debugImage;
 
 
 
