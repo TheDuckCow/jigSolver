@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D1V-Wo-45F">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -327,7 +327,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-KG-Qt5">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-KG-Qt5">
                                 <rect key="frame" x="100" y="52" width="400" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Oql-tx-bFp"/>
@@ -342,13 +342,18 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1EE-cO-dmO"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(processing)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18v-xr-XIZ">
-                                <rect key="frame" x="16" y="556" width="568" height="32"/>
+                                <rect key="frame" x="253.5" y="571.5" width="93.5" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Db6-3t-ETI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Db6-3t-ETI"/>
+                                    </mask>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -364,13 +369,24 @@
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="LgW-Wt-Z81" secondAttribute="trailing" id="LAV-CT-Si6"/>
                             <constraint firstItem="h4a-UC-OB9" firstAttribute="top" secondItem="Lsg-bZ-Aho" secondAttribute="bottom" id="Qcl-al-lQT"/>
                             <constraint firstAttribute="centerX" secondItem="LgW-Wt-Z81" secondAttribute="centerX" id="UFo-7l-BuA"/>
+                            <constraint firstItem="h4a-UC-OB9" firstAttribute="top" secondItem="18v-xr-XIZ" secondAttribute="bottom" constant="180" id="Yt4-47-Z3m"/>
                             <constraint firstItem="LgW-Wt-Z81" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZY9-KG-Qt5" secondAttribute="bottom" id="Z9q-Xw-RX5"/>
-                            <constraint firstAttribute="bottom" secondItem="18v-xr-XIZ" secondAttribute="bottom" constant="12" id="aTi-wy-1PT"/>
+                            <constraint firstAttribute="centerX" secondItem="18v-xr-XIZ" secondAttribute="centerX" id="ZYT-NI-LgS"/>
+                            <constraint firstAttribute="bottom" secondItem="18v-xr-XIZ" secondAttribute="bottom" constant="8" id="aTi-wy-1PT"/>
                             <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="1EE-cO-dmO" secondAttribute="bottom" id="bJA-vX-46x"/>
+                            <constraint firstItem="Lsg-bZ-Aho" firstAttribute="top" secondItem="18v-xr-XIZ" secondAttribute="bottom" constant="-44" id="df8-b0-88Y"/>
                             <constraint firstItem="18v-xr-XIZ" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leading" constant="16" id="fRD-PC-gVm"/>
                             <constraint firstAttribute="trailing" secondItem="18v-xr-XIZ" secondAttribute="trailing" constant="16" id="fey-R4-DRJ"/>
                             <constraint firstItem="Lsg-bZ-Aho" firstAttribute="leading" secondItem="MDP-ZN-7U2" secondAttribute="leadingMargin" constant="-16" id="gDr-RW-ySe"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fRD-PC-gVm"/>
+                                <exclude reference="fey-R4-DRJ"/>
+                                <exclude reference="df8-b0-88Y"/>
+                                <exclude reference="Yt4-47-Z3m"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Preview" id="UKQ-tk-qqO">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="F5F-cJ-C8h">
