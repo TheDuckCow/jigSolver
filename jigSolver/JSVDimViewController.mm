@@ -56,10 +56,12 @@ using namespace cv;
     
     // STUFF for not doing calculation again if it already did it once.
     if (self.checkToRun == [JSVsingleton sharedObj].loadStatus){
+        NSLog(@"DON'T RUN");
         return;
     }
     else{
         self.checkToRun = [JSVsingleton sharedObj].loadStatus;
+        NSLog(@"run once A");
     }
     
     
@@ -119,7 +121,7 @@ using namespace cv;
     self.maskView.image = self.masks[index];
     
     [UIView animateWithDuration:.5 animations:^{
-        self.maskView.alpha = 0.5;
+        self.maskView.alpha = 0.3;
     }];
 }
 

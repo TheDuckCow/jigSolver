@@ -54,29 +54,62 @@ using namespace cv;
         UIImage *maskImg = [self maskImage: [[JSVsingleton sharedObj] getPieceOriginal:i] withMask:[[JSVsingleton sharedObj] getPieceMaskInverse:i]];
         [self.imageViews addObject: maskImg];
         
+        // integers of tiles of the puzzle (number of pieces by number of pieces)
         int x = [JSVsingleton sharedObj].cols;
         int y = [JSVsingleton sharedObj].rows;
         
-        // start by assuming 2x2
-        double height = self.size.height*.75/y; // make the pieces by 75% of the screen width/height
-        double width = self.size.width*.75/x;   // in total accross, so each is a fraction of that.
-        
-        // now also add in the "offset x/y", but relative to scaling of original image...
-        // need original image scale to do that... put it onto singleton later.
-        
-        // actually gets a value..?
+        // below is the dimensions of the OVERALL peiced un-borken-up image
         CGPoint origDims = [[JSVsingleton sharedObj] getPiecesDims];
-        NSLog(@" dims: %f %f", origDims.x, origDims.y);
-        int div = 5;
         
-        CGRect framed = CGRectMake(self.size.width*.25*0 + piece.offset_x/div, self.size.height*.25*0 + piece.offset_y/div, width, height);
-        NSLog(@" convert: %i %i",i%x,i/x);
+        // dimensions of the piece
+        Mat tmp = piece.mask;
+        int px = tmp.cols;
+        int py = tmp.rows;
+        
+        // the factor of scaling overall, factor of less than 1
+        float div = self.size.width/origDims.x;
+        
+        
+        // logical addition, to move down the frame if screen is vertical
+        int liny = 100;
+        if (self.size.width > self.size.height){
+            liny = 0;
+            div = self.size.height/origDims.y;
+            //NSLog(@"here! >>>>>>>>:");
+        }
+        // don't both with this scenario.
+        
+        // make the actual object frame
+        NSLog(@"div: %f >> %d %d %f", div, px, x, origDims.x);
+        CGRect framed = CGRectMake(piece.offset_x*div, piece.offset_y*div + liny, px*div, py*div);
+        
+        // for future animation, where it currently is .. kinda. not really.
+        //NSLog(@" convert: %i %i",i%x,i/x);
         
         UIImageView *pieceBlock = [[UIImageView alloc] initWithFrame:framed];
         pieceBlock.image = maskImg;
         pieceBlock.contentMode = UIViewContentModeScaleAspectFit;
         
         [self.view addSubview:pieceBlock];
+        
+        
+        
+        
+        // now setup the animation.
+        CGRect newFrame = CGRectMake (0,00,px*div,py*div);
+        // calcualte where the piece SHOULD be.
+        newFrame.origin.x = px*piece.guess_x*div;
+        newFrame.origin.y = py*piece.guess_y*div + liny;
+        [UIView animateWithDuration:1.5
+                              delay: 0.75
+                            options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
+                         animations:^{
+                             pieceBlock.frame = newFrame;   // move
+                         }
+                         completion:nil];  // no completion handler
+        
+        
+        
     }
     
 }
