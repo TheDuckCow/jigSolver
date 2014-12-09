@@ -143,7 +143,8 @@ using namespace std;
     
     // OLD WAY OF THRESHOLD
     threshold(gray,dst,65,255,THRESH_BINARY);
-    //threshold(gray,dst,0,255,CV_THRESH_BINARY | CV_THRESH_OTSU);
+    //threshold(gray,dst,10,255,CV_THRESH_BINARY | CV_THRESH_OTSU);
+    //adaptiveThreshold(gray, dst,255,ADAPTIVE_THRESH_GAUSSIAN_C,THRESH_BINARY, 37, -4);
     blur(dst, dst, cv::Size(5,5));
     
     // dilate to fill any "holes"
@@ -156,19 +157,20 @@ using namespace std;
     
     ///////// NEW custom method of segmentation
     // doesn't really work all that well... sigh.
-//    Mat tmp2;
-//    cvtColor(srcMat,tmp2,CV_RGB2HSV);
-//    dst = Mat::zeros(tmp2.size(),CV_8UC1);
-//    for (int x=0; x< dst.rows; x++){
-//        for (int y=0; y< dst.cols; y++){
-//            Vec3b col = tmp2.at<Vec3b>(x,y);
-//            //if (col[2] > 60 && col[1] > 20){
-//            if (col[2] > 60 && col[1] > 30){
-//                dst.at<uchar>(x,y) = 255;
-//            }
-//        }
-//    }
-//    dilate(dst, dst, element, cv::Point(-1, -1), 1);
+    Mat tmp2;
+    cvtColor(srcMat,tmp2,CV_RGB2HSV);
+    dst = Mat::zeros(tmp2.size(),CV_8UC1);
+    for (int x=0; x< dst.rows; x++){
+        for (int y=0; y< dst.cols; y++){
+            Vec3b col = tmp2.at<Vec3b>(x,y);
+            //if (col[2] > 60 && col[1] > 20){
+            if (col[2] > 60){
+                dst.at<uchar>(x,y) = 255;
+            }
+        }
+    }
+    erode(dst, dst, element, cv::Point(-1, -1), 1);
+    dilate(dst, dst, element, cv::Point(-1, -1), 2);
     
     ///////// NEW custom method of segmentation </end>
     
@@ -192,7 +194,7 @@ using namespace std;
         int area = contourArea(contours[i]);
         // this seems SUPER arbitrary.
         //if (area >500000){
-        if (area >100000){
+        if (area >50000){
             drawContours(contourOut, contours, i, 255, CV_FILLED, 8, hierarchy);
             
             // CREATE the puzzle piece. long winded process.

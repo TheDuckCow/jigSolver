@@ -101,7 +101,17 @@
             solution = [UIImage imageNamed:@"set4_sol.JPG"];
             break;
         case 8:
-            // set 3!!!!
+            // set 3!!!!set2_mess2.png
+            img = [UIImage imageNamed:@"set2_mess2.png"];
+            solution = [UIImage imageNamed:@"IMG_2874.JPG"];
+            break;
+        case 9:
+            // set 4!!!!
+            img = [UIImage imageNamed:@"set2_mess1.png"];
+            solution = [UIImage imageNamed:@"IMG_2874.JPG"];
+            break;
+        case 10:
+            // set 4!!!!
             img = [UIImage imageNamed:@"IMG_2871.JPG"];
             solution = [UIImage imageNamed:@"IMG_2874.JPG"];
             break;
