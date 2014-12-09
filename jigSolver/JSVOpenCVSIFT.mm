@@ -12,10 +12,11 @@
 
 #import "JSVsingleton.h"
 
-#import <opencv2/opencv.hpp>
 #import <opencv2/nonfree/features2d.hpp>
 #import <algorithm>
 #import <vector>
+#import <opencv2/opencv.hpp>
+#import "opencv2/highgui/ios.h"
 
 using namespace cv;
 
@@ -80,6 +81,17 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
         item.index = i;
         item.std_unnormalized = [self computeSolutionDeviationWithMatches:matches solutionKeypoints:keyPointsSolution];
         results.push_back(item);
+        
+        //FOR GETTING IMAGES FOR PRESENTATION
+//        if (i == 3) {
+//            Mat img_matches;
+//            Mat img1, img2;
+//            cvtColor(piece.originalImage, img1, CV_BGRA2BGR);
+//            cvtColor(solutionPiece.originalImage, img2, CV_BGRA2BGR);
+//            drawMatches(img1, keyPointsPiece, img2, keyPointsSolution, matches, img_matches, Scalar(0,0,0), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+//            
+//            [JSVsingleton sharedObj].debugImage = MatToUIImage(img_matches.clone());
+//        }
     }
     
     sort(results.begin(), results.end(), compareResultMatch);
@@ -102,6 +114,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
         if (item.std_unnormalized > std_treshold){
             JSVpuzzlePiece * piece = pieces[item.index];
             piece.guess_rotation = 0;
+        }
+        if (!(x < finalResult.cols && y < finalResult.rows)) {
+            continue;
         }
         
         
@@ -149,18 +164,9 @@ static NSString * exceptionHeader = @"JSVOpenCVSIFT Error";
     
 
     //Finding good matches
-//    Mat img_matches;
-//    Mat img1, img2;
-//    cvtColor(piece.originalImage, img1, CV_BGRA2BGR);
-//    cvtColor(solutionPiece.originalImage, img2, CV_BGRA2BGR);
 
 //    drawMatches(img1, keyPointsPiece, img2, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
 //    drawMatches(piece.originalImage, keyPointsPiece, solutionPiece.originalImage, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-//    drawMatches(img1, keyPointsPiece, img2, keyPointsSolution, matches, img_matches, Scalar(0,0,0), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-    
-//    drawMatches(piece.originalImage, keyPointsPiece, solutionPiece.originalImage, keyPointsSolution, matches, img_matches, Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-    
-//    return MatToUIImage(img_matches.clone());
 }
 
 #pragma mark - Comparators
@@ -182,6 +188,7 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     Mat beforeDescriptors;
     detector.detect(puzzle.originalImage, keypoints);
     extractor.compute(puzzle.originalImage, keypoints, beforeDescriptors);
+    
     
     descriptors = Mat();
     
@@ -209,12 +216,12 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     matcher.match(descriptorPiece, descriptorSolution, matches);
     
     [self filterBestDistanceWithMatches:matches bestNum:100];
-    
-    
+
+
     [self filterBasedOnOrientations:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
-    
+
     [self filterBasedOnKeyPointOrientatio:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
-    
+
     [self filterLocationOutliers:matches keyPointsPiece:keyPointPiece keyPointsSolution:keyPointSolution];
     
     final_matches = matches;
@@ -413,7 +420,7 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
 
 +(void) filterBasedOnOrientations: (vector<DMatch> &) matches keyPointsPiece: (vector<KeyPoint> &) keyPointPiece keyPointsSolution: (vector<KeyPoint> &) keyPointSolution{
     
-    const double threshold = 20.0 / 180 * M_PI;
+    const double threshold = 45.0 / 180 * M_PI;
     vector<int> toBeDeleted;
     
     vector<double> averages;
@@ -439,7 +446,9 @@ bool compareResultMatch(const ResultMatch & a, const ResultMatch & b){
     int index = (int) averages.size() / 2;
     nth_element(averages.begin(), averages.begin() + index, averages.end());
     
-    
+    if (averages.size() == 0) {
+        return -1000000;
+    }
     return averages[index];
 }
 
