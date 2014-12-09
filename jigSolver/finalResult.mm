@@ -63,9 +63,13 @@ using namespace cv;
         
         // now also add in the "offset x/y", but relative to scaling of original image...
         // need original image scale to do that... put it onto singleton later.
+        
+        // actually gets a value..?
+        CGPoint origDims = [[JSVsingleton sharedObj] getPiecesDims];
+        NSLog(@" dims: %f %f", origDims.x, origDims.y);
         int div = 5;
         
-        CGRect framed = CGRectMake(self.size.width*.25 + piece.offset_x/div, self.size.height*.25 + piece.offset_y/div, width, height);
+        CGRect framed = CGRectMake(self.size.width*.25*0 + piece.offset_x/div, self.size.height*.25*0 + piece.offset_y/div, width, height);
         NSLog(@" convert: %i %i",i%x,i/x);
         
         UIImageView *pieceBlock = [[UIImageView alloc] initWithFrame:framed];

@@ -121,6 +121,13 @@ using namespace cv;
     NSLog(@" Judzing puzzle size: (%i pieces) col,row:%i,%i",number,self.cols, self.rows);
     
 }
+- (CGPoint) getPiecesDims{
+    
+    Mat tmp;
+    UIImageToMat(self.piecesImg, tmp);
+    
+    return CGPointMake(tmp.cols, tmp.rows);
+}
 
 
 // creates methods: getPieceMask: withIndex

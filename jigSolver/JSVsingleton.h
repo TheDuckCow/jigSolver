@@ -36,5 +36,6 @@
 - (UIImage *) getPieceOriginal: (int) index;
 - (void) determinePuzzleSize;
 - (void) processPieces;
+- (CGPoint) getPiecesDims;
 
 @end
